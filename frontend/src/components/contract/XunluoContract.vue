@@ -179,6 +179,26 @@
             />
         </div>
 
+        <!-- PCCS 智能资源推荐 -->
+        <div class="form-section" v-if="!isReadonly">
+            <div class="section-header-with-badge">
+                <h4>
+                    智能资源推荐
+                    <el-tag type="success" effect="light" size="small" style="margin-left: 10px">
+                        基于 PCCS Capability 维度
+                    </el-tag>
+                </h4>
+                <el-text type="info" size="small">
+                    系统将根据巡逻任务需求，从资源池中推荐最适合的平台和装备
+                </el-text>
+            </div>
+            <ResourceRecommendation
+                mission-type="patrol"
+                :auto-load="true"
+                @select="handleResourceSelect"
+            />
+        </div>
+
         <div class="step-actions" v-if="!isReadonly">
             <el-button @click="$emit('back')">上一步</el-button>
             <el-button type="primary" @click="handleNext">下一步</el-button>
@@ -191,6 +211,7 @@ import { reactive, watch, defineEmits, defineProps, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { get } from 'lodash-es';
 import MapSelection from './MapSelection.vue';
+import ResourceRecommendation from '@/components/pccs/ResourceRecommendation.vue';
 
 // 4. 定义 props，接收来自父组件的数据
 const props = defineProps({
@@ -354,6 +375,19 @@ const onScenarioChange = (scenario) => {
     }
 };
 
+// PCCS 资源推荐选择处理
+function handleResourceSelect(resource) {
+    ElMessage.success({
+        message: `已选择资源: ${resource.name}`,
+        duration: 2000
+    });
+
+    // 这里可以添加将选中资源应用到合同配置的逻辑
+    console.log('选中的资源 PCCS 信息:', resource);
+    console.log('效能评分:', resource.match_effectiveness);
+    console.log('能力信息:', resource.capability);
+}
+
 function handleNext() {
     if (!formData.name) { ElMessage.warning('请输入合同名称'); return; }
     if (!formData.description) { ElMessage.warning('请输入任务描述'); return }
@@ -395,4 +429,7 @@ onMounted(() => {
 .bottom-left { bottom: 8px; left: 8px; }
 .bottom-right { bottom: 8px; right: 8px; }
 .step-actions { display: flex; justify-content: center; gap: 16px; margin-top: 32px; padding-top: 24px; border-top: 1px solid #f3f4f6; }
+.section-header-with-badge { margin-bottom: 16px; }
+.section-header-with-badge h4 { display: inline-flex; align-items: center; }
+.header-subtitle { color: #6b7280; font-size: 13px; font-weight: normal; margin-left: 8px; }
 </style>
