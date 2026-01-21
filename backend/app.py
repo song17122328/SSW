@@ -1319,6 +1319,294 @@ def _build_resources_from_db(db, scenario_id: int, team: str, choice: str):
 #     return str(task_dir), str(res_dir)
 
 
+# ========== PCCS API 接口 (资源虚拟化标准) ==========
+
+from models import PCCSResource, global_resource_pool
+from pccs_adapter import PCCSAdapter
+
+# 初始化 PCCS 适配器
+pccs_adapter = PCCSAdapter()
+
+@app.route('/api/pccs/resources', methods=['GET'])
+def get_pccs_resources():
+    """
+    获取所有 PCCS 资源列表
+    Query 参数:
+        - type: 资源类型 (platform/equipment)
+        - category: 资源类别
+        - mission_type: 任务类型 (patrol/strike/air_defense/recon)
+        - availability: 可用状态 (available/busy/reserved)
+    """
+    try:
+        resource_type = request.args.get('type')
+        category = request.args.get('category')
+        mission_type = request.args.get('mission_type')
+        availability = request.args.get('availability')
+
+        # 构建过滤器
+        filters = {}
+        if category:
+            filters['category'] = category
+        if mission_type:
+            filters['mission_type'] = mission_type
+        if availability:
+            filters['availability'] = availability
+
+        resources = global_resource_pool.list_resources(
+            resource_type=resource_type,
+            filters=filters
+        )
+
+        return jsonify({
+            'success': True,
+            'count': len(resources),
+            'resources': [r.to_dict() for r in resources]
+        }), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/pccs/resource/<resource_type>/<int:resource_id>', methods=['GET'])
+def get_pccs_resource(resource_type, resource_id):
+    """
+    获取单个资源的 PCCS 完整信息
+    """
+    try:
+        if resource_type not in ['platform', 'equipment']:
+            return jsonify({
+                'success': False,
+                'error': 'Invalid resource_type. Must be platform or equipment'
+            }), 400
+
+        resource = global_resource_pool.get_resource(resource_type, resource_id)
+
+        if resource is None:
+            return jsonify({
+                'success': False,
+                'error': f'Resource {resource_type}:{resource_id} not found'
+            }), 404
+
+        return jsonify({
+            'success': True,
+            'resource': resource.to_dict()
+        }), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/pccs/resource/<resource_type>/<int:resource_id>/state', methods=['PUT'])
+def update_pccs_resource_state(resource_type, resource_id):
+    """
+    更新资源的 State 维度
+    Request Body 示例:
+    {
+        "operational_status": "online",
+        "availability_status": "busy",
+        "mission_status": "executing",
+        "health_level": 0.95,
+        "fuel_level": 0.7,
+        "ammunition_level": 0.8
+    }
+    """
+    try:
+        resource = global_resource_pool.get_resource(resource_type, resource_id)
+
+        if resource is None:
+            return jsonify({
+                'success': False,
+                'error': f'Resource {resource_type}:{resource_id} not found'
+            }), 404
+
+        data = request.get_json()
+
+        # 更新 State 字段
+        if 'operational_status' in data:
+            resource.state.operational_status = data['operational_status']
+        if 'availability_status' in data:
+            resource.state.availability_status = data['availability_status']
+        if 'mission_status' in data:
+            resource.state.mission_status = data['mission_status']
+        if 'health_level' in data:
+            resource.state.health_level = float(data['health_level'])
+        if 'fuel_level' in data:
+            resource.state.fuel_level = float(data['fuel_level'])
+        if 'battery_level' in data:
+            resource.state.battery_level = float(data['battery_level'])
+        if 'ammunition_level' in data:
+            resource.state.ammunition_level = float(data['ammunition_level'])
+        if 'network_latency' in data:
+            resource.state.network_latency = float(data['network_latency'])
+        if 'packet_loss_rate' in data:
+            resource.state.packet_loss_rate = float(data['packet_loss_rate'])
+        if 'connection_strength' in data:
+            resource.state.connection_strength = float(data['connection_strength'])
+
+        # 更新最后修改时间
+        from datetime import datetime
+        resource.last_modified_time = datetime.now().isoformat()
+        resource.state.last_update_time = datetime.now().isoformat()
+
+        return jsonify({
+            'success': True,
+            'message': 'Resource state updated successfully',
+            'resource': resource.to_dict()
+        }), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/pccs/search', methods=['GET'])
+def search_pccs_by_capability():
+    """
+    根据 Capability 维度搜索资源 (用于任务匹配)
+    Query 参数:
+        - mission_type: 任务类型 (必需) patrol/strike/air_defense/recon
+        - min_effectiveness: 最小效能评分 (0-1, 默认 0.5)
+    """
+    try:
+        mission_type = request.args.get('mission_type')
+        min_effectiveness = float(request.args.get('min_effectiveness', 0.5))
+
+        if not mission_type:
+            return jsonify({
+                'success': False,
+                'error': 'mission_type is required'
+            }), 400
+
+        if mission_type not in ['patrol', 'strike', 'air_defense', 'recon']:
+            return jsonify({
+                'success': False,
+                'error': 'Invalid mission_type. Must be one of: patrol, strike, air_defense, recon'
+            }), 400
+
+        resources = global_resource_pool.search_by_capability(
+            mission_type=mission_type,
+            min_effectiveness=min_effectiveness
+        )
+
+        # 添加评分信息到返回结果
+        results = []
+        for r in resources:
+            resource_dict = r.to_dict()
+            resource_dict['match_effectiveness'] = r.capability.effectiveness_scores.get(mission_type, 0.0)
+            results.append(resource_dict)
+
+        return jsonify({
+            'success': True,
+            'mission_type': mission_type,
+            'min_effectiveness': min_effectiveness,
+            'count': len(results),
+            'resources': results
+        }), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/pccs/statistics', methods=['GET'])
+def get_pccs_statistics():
+    """
+    获取 PCCS 资源池统计信息
+    """
+    try:
+        stats = global_resource_pool.get_statistics()
+
+        # 添加更详细的统计信息
+        all_resources = global_resource_pool.list_resources()
+
+        # 按任务类型统计
+        mission_type_counts = {}
+        for mission_type in ['patrol', 'strike', 'air_defense', 'recon']:
+            mission_type_counts[mission_type] = len([
+                r for r in all_resources
+                if mission_type in r.capability.mission_types
+            ])
+
+        # 按健康状态统计
+        health_distribution = {
+            'healthy': len([r for r in all_resources if r.state.health_level >= 0.8]),
+            'degraded': len([r for r in all_resources if 0.5 <= r.state.health_level < 0.8]),
+            'critical': len([r for r in all_resources if r.state.health_level < 0.5])
+        }
+
+        stats.update({
+            'mission_type_counts': mission_type_counts,
+            'health_distribution': health_distribution
+        })
+
+        return jsonify({
+            'success': True,
+            'statistics': stats
+        }), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/pccs/reload', methods=['POST'])
+def reload_pccs_resources():
+    """
+    重新加载资源池 - 从数据库重新生成 PCCS 资源
+    """
+    try:
+        db = get_db()
+
+        # 清空现有资源池
+        global_resource_pool.resources.clear()
+
+        # 重新加载平台资源
+        platforms = db.execute('SELECT * FROM platforms').fetchall()
+        platform_count = 0
+
+        for platform_row in platforms:
+            platform_data = dict(platform_row)
+
+            # 获取平台关联的装备
+            equipments_rows = db.execute('''
+                SELECT e.* FROM equipments e
+                JOIN platform_equipment_link pe ON e.id = pe.equipment_id
+                WHERE pe.platform_id = ?
+            ''', (platform_data['id'],)).fetchall()
+
+            equipments = [dict(r) for r in equipments_rows]
+
+            # 转换为 PCCS 资源
+            pccs_resource = pccs_adapter.convert_platform_to_pccs(platform_data, equipments)
+
+            # 注册到资源池
+            global_resource_pool.register_resource(pccs_resource)
+            platform_count += 1
+
+        # 重新加载装备资源 (可选：仅作为独立资源)
+        equipments = db.execute('SELECT * FROM equipments').fetchall()
+        equipment_count = 0
+
+        for equipment_row in equipments:
+            equipment_data = dict(equipment_row)
+
+            # 转换为 PCCS 资源
+            pccs_resource = pccs_adapter.convert_equipment_to_pccs(equipment_data)
+
+            # 注册到资源池
+            global_resource_pool.register_resource(pccs_resource)
+            equipment_count += 1
+
+        return jsonify({
+            'success': True,
+            'message': 'PCCS resource pool reloaded successfully',
+            'platforms_loaded': platform_count,
+            'equipments_loaded': equipment_count,
+            'total': platform_count + equipment_count
+        }), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
 # ========== Socket.IO handlers（集成 server.py 功能） ==========
 
 @socketio.on('connect')
@@ -1551,6 +1839,16 @@ if __name__ == '__main__':
     print(f"\n{BLUE}====================================================={RESET}")
     print(f"  🚀 {GREEN}对海作战仿真平台 - 后端服务正在启动...{RESET}")
     print(f"{BLUE}====================================================={RESET}")
+
+    # *** 初始化 PCCS 资源池 ***
+    try:
+        from init_pccs_pool import init_pccs_resource_pool
+        platform_count, equipment_count = init_pccs_resource_pool()
+    except Exception as e:
+        print(f"\n{YELLOW}⚠ PCCS 资源池初始化失败: {e}{RESET}")
+        print(f"{YELLOW}  服务将继续启动，但 PCCS 功能可能不可用{RESET}\n")
+
+    print(f"{BLUE}====================================================={RESET}")
     print(f"  {YELLOW}▶︎ 可访问地址:{RESET}")
     print(f"    - 本机访问:   {GREEN}http://127.0.0.1:5000{RESET} (推荐)")
     print(f"    - 本机访问:   {GREEN}http://localhost:5000{RESET}")
@@ -1560,6 +1858,8 @@ if __name__ == '__main__':
     print(f"    - {GREEN}http://127.0.0.1:5000/api/doc{RESET}")
     print(f"\n  {YELLOW}▶︎ 实时通信 (WebSocket):{RESET}")
     print(f"    - 路径: {GREEN}/socket.io/{RESET}")
+    print(f"\n  {YELLOW}▶︎ PCCS 资源池:{RESET}")
+    print(f"    - 资源池 API: {GREEN}/api/pccs/*{RESET}")
     print(f"{BLUE}====================================================={RESET}\n")
     
     # 使用 eventlet 时，Flask 的原生 debug 模式可能不完全兼容，

@@ -12,16 +12,23 @@
           </div>
         </template>
         <template #extra>
-          <div class="header-breadcrumb">
-            <el-breadcrumb separator="/">
-              <el-breadcrumb-item>{{ platform.country || '未知国别' }}</el-breadcrumb-item>
-              <el-breadcrumb-item>{{ platform.model_type || '未知型号' }}</el-breadcrumb-item>
-            </el-breadcrumb>
+          <div class="header-actions">
+            <div class="header-breadcrumb">
+              <el-breadcrumb separator="/">
+                <el-breadcrumb-item>{{ platform.country || '未知国别' }}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{ platform.model_type || '未知型号' }}</el-breadcrumb-item>
+              </el-breadcrumb>
+            </div>
+            <el-radio-group v-model="viewMode" size="small" style="margin-left: 20px">
+              <el-radio-button label="traditional">传统视图</el-radio-button>
+              <el-radio-button label="pccs">PCCS 视图</el-radio-button>
+            </el-radio-group>
           </div>
         </template>
       </el-page-header>
 
-      <div class="details-grid">
+      <!-- 传统视图 -->
+      <div v-if="viewMode === 'traditional'" class="details-grid">
         <!-- 渲染平台自身详情的卡片 (例如概况, 技术数据) -->
         <template v-for="(section, title) in platform.details" :key="title">
           <el-card class="detail-card" v-if="Object.keys(section).length > 0">
@@ -65,6 +72,11 @@
         </el-card>
 
       </div>
+
+      <!-- PCCS 视图 -->
+      <div v-if="viewMode === 'pccs'">
+        <PCCSDisplay resource-type="platform" :resource-id="props.id" />
+      </div>
     </div>
     <el-empty v-if="!loading && !platform" description="未能加载平台数据" />
   </div>
@@ -76,7 +88,7 @@ import { ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '@/services/api';
 import { ElMessage } from 'element-plus';
-// (您可能还需要从 element-plus 导入其他组件，这里省略)
+import PCCSDisplay from '@/components/pccs/PCCSDisplay.vue';
 
 const props = defineProps({
   id: {
@@ -89,6 +101,7 @@ const props = defineProps({
 const router = useRouter();
 const loading = ref(true);
 const platform = ref(null);
+const viewMode = ref('traditional'); // 视图模式: traditional / pccs
 
 const fetchPlatformDetails = async (platformId) => {
   loading.value = true;
@@ -137,6 +150,12 @@ watchEffect(() => {
   font-size: 20px;
   font-weight: 600;
   color: #303133;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .header-breadcrumb {

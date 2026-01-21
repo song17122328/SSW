@@ -199,4 +199,44 @@ export default {
     return apiClient.delete(`/sim/scenarios/${scenarioId}`).then(res => res.data);
   },
 
+  // ==========================================================
+  // ===                PCCS 资源虚拟化 API                     ===
+  // ==========================================================
+
+  // 获取所有 PCCS 资源
+  getPCCSResources(params = {}) {
+    // params 可包含: type, category, mission_type, availability
+    return apiClient.get('/pccs/resources', { params }).then(res => res.data);
+  },
+
+  // 获取单个 PCCS 资源详情
+  getPCCSResource(resourceType, resourceId) {
+    return apiClient.get(`/pccs/resource/${resourceType}/${resourceId}`).then(res => res.data);
+  },
+
+  // 更新 PCCS 资源状态
+  updatePCCSResourceState(resourceType, resourceId, stateData) {
+    return apiClient.put(`/pccs/resource/${resourceType}/${resourceId}/state`, stateData).then(res => res.data);
+  },
+
+  // 根据能力搜索资源 (用于任务匹配)
+  searchPCCSByCapability(missionType, minEffectiveness = 0.5) {
+    return apiClient.get('/pccs/search', {
+      params: {
+        mission_type: missionType,
+        min_effectiveness: minEffectiveness
+      }
+    }).then(res => res.data);
+  },
+
+  // 获取 PCCS 资源池统计信息
+  getPCCSStatistics() {
+    return apiClient.get('/pccs/statistics').then(res => res.data);
+  },
+
+  // 重新加载 PCCS 资源池
+  reloadPCCSResources() {
+    return apiClient.post('/pccs/reload').then(res => res.data);
+  },
+
 };
