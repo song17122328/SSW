@@ -1,0 +1,81 @@
+/**
+ * 🎨 CSS变量定义 - 蓝色科技大屏主题
+ */
+
+:root {
+  /* 主色调 - 蓝色科技风 */
+  --primary-color: #1e40af;
+  --background-color: #f5f7fa;
+  
+  /* 间距系统 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  
+  /* 字体大小 */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  
+  /* 字体权重 */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  --font-weight-bolder: 700;
+  
+  /* 边框圆角 */
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 14px;
+  --border-radius-xl: 18px;
+  --border-radius-round: 50%;
+  
+  /* 过渡动画 */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Z-index层级 */
+  --z-index-dropdown: 1000;
+  --z-index-modal: 2000;
+  --z-index-tooltip: 3000;
+  --z-index-loading: 4000;
+  
+  /* 容器尺寸 */
+  --container-sm: 576px;
+  --container-md: 768px;
+  --container-lg: 992px;
+  --container-xl: 1200px;
+  --container-xxl: 1400px;
+  
+  /* 组件尺寸 */
+  --header-height: 64px;
+  --sidebar-width: 280px;
+  --footer-height: 44px;
+  
+  /* 表格配置 */
+  --table-header-bg: var(--primary-color);
+  --table-stripe-bg: rgba(30, 41, 59, 0.3);
+  --table-hover-bg: rgba(59, 130, 246, 0.1);
+  
+  /* 按钮配置 */
+  --button-height-sm: 32px;
+  --button-height-md: 36px;
+  --button-height-lg: 44px;
+  
+  /* 输入框配置 */
+  --input-height-sm: 32px;
+  --input-height-md: 36px;
+  --input-height-lg: 44px;
+  
+  /* 网格线颜色 */
+  --grid-line-color: rgba(59, 130, 246, 0.2);
+  --grid-line-glow: rgba(6, 182, 212, 0.3);
+}

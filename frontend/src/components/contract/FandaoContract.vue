@@ -1,0 +1,615 @@
+<template>
+    <el-card>
+        <template #header>
+            <h3>
+                反导任务配置
+                <small v-if="scenarioName" class="header-subtitle">
+                    (基于想定: {{ scenarioName }})
+                </small>
+            </h3>
+        </template>
+
+        <!-- 基本信息 -->
+        <div class="form-section">
+            <h4>基本信息</h4>
+            <el-form :model="formData" label-width="120px">
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="合同名称" required>
+                            <el-input v-model="formData.name" placeholder="请输入合同名称" :disabled="isReadonly" />
+                        </el-form-item>
+                    </el-col>
+
+                    <el-col :span="12">
+                        <el-form-item label="作战场景">
+                            <el-input v-model="formData.scenario" disabled />
+                        </el-form-item>
+                    </el-col>
+
+                                        <!-- *** 核心修改 2：添加己方阵营选择 *** -->
+                    <el-col :span="12">
+                        <el-form-item label="己方阵营" required>
+                            <el-radio-group v-model="formData.side" :disabled="isReadonly">
+                                <el-radio-button value="RED">红方</el-radio-button>
+                                <el-radio-button value="BLUE">蓝方</el-radio-button>
+                            </el-radio-group>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-form-item label="任务描述" required>
+                    <el-input v-model="formData.description" type="textarea" :rows="3" placeholder="请描述反导任务的具体要求和目标" :disabled="isReadonly" />
+                </el-form-item>
+            </el-form>
+        </div>
+
+        <!-- 作战时间 -->
+        <div class="form-section">
+            <h4>作战时间</h4>
+            <el-form :model="formData.operationTime" label-width="120px">
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="开始时间" required>
+                            <el-date-picker v-model="formData.operationTime.startTime" type="datetime"
+                                placeholder="选择开始时间" format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss"
+                                style="width: 100%" :disabled="isReadonly" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="结束时间" required>
+                            <el-date-picker v-model="formData.operationTime.endTime" type="datetime"
+                                placeholder="选择结束时间" format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss"
+                                style="width: 100%" :disabled="isReadonly" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+
+        <!-- 感知装备要求 -->
+        <div class="form-section">
+            <h4>感知(Sense)作战装备要求</h4>
+            <el-form label-width="150px">
+                <el-form-item label="装备类型">
+                    <el-select v-model="formData.senseRequirement.equipmentTypes" multiple placeholder="请选择装备类型"
+                        style="width: 100%" :disabled="isReadonly">
+                        <el-option label="飞行器" value="飞行器" />
+                        <el-option label="舰艇" value="舰艇" />
+                        <el-option label="航母" value="航母" />
+                    </el-select>
+                </el-form-item>
+
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="感知范围">
+                            <el-input v-model="formData.senseRequirement.capabilities.sensingRange" placeholder="例如：50" :disabled="isReadonly">
+                                <template #append >km</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="精度">
+                            <el-input v-model="formData.senseRequirement.capabilities.accuracy" placeholder="例如：100" :disabled="isReadonly">
+                                <template #append>m</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="速度">
+                            <el-input v-model="formData.senseRequirement.capabilities.speed" placeholder="例如：120" :disabled="isReadonly">
+                                <template #append>m/s</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="通信链路带宽">
+                            <el-input v-model="formData.senseRequirement.capabilities.communicationBandwidth" :disabled="isReadonly"
+                                placeholder="例如：2">
+                                <template #append>MB/s</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="出航航线">
+                            <el-input v-model="formData.senseRequirement.capabilities.departureRoute" :disabled="isReadonly"/>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="返航航线">
+                            <el-input v-model="formData.senseRequirement.capabilities.returnRoute" :disabled="isReadonly" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+
+        <!-- 控制装备要求 -->
+        <div class="form-section">
+            <h4>控制(Command)作战装备要求</h4>
+            <el-form label-width="180px">
+                <el-form-item label="装备类型">
+                    <el-select v-model="formData.commandRequirement.equipmentTypes" multiple placeholder="请选择装备类型" :disabled="isReadonly"
+                        style="width: 100%">
+                        <el-option label="飞行器" value="飞行器" />
+                        <el-option label="舰艇" value="舰艇" />
+                        <el-option label="航母" value="航母" />
+                    </el-select>
+                </el-form-item>
+
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="与Act装备距离要求">
+                            <el-input v-model="formData.commandRequirement.capabilities.distanceToAct" :disabled="isReadonly"
+                                placeholder="例如：200">
+                                <template #append>km</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="计算能力">
+                            <el-input v-model="formData.commandRequirement.capabilities.computingPower" :disabled="isReadonly"
+                                placeholder="例如：1.6">
+                                <template #append>GHz</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="控制范围">
+                            <el-input v-model="formData.commandRequirement.capabilities.controlRange" :disabled="isReadonly"
+                                placeholder="例如：300">
+                                <template #append>km</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="指挥精度">
+                            <el-input v-model="formData.commandRequirement.capabilities.commandAccuracy" :disabled="isReadonly"
+                                placeholder="例如：100">
+                                <template #append>m</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="出航航线">
+                            <el-input v-model="formData.commandRequirement.capabilities.departureRoute"  :disabled="isReadonly"/>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="返航航线">
+                            <el-input v-model="formData.commandRequirement.capabilities.returnRoute" :disabled="isReadonly"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+
+        <!-- 执行装备要求 -->
+        <div class="form-section">
+            <h4>执行(Act)作战装备要求</h4>
+            <el-form label-width="150px">
+                <el-form-item label="装备类型">
+                    <el-select v-model="formData.actRequirement.equipmentTypes" multiple placeholder="请选择装备类型" :disabled="isReadonly"
+                        style="width: 100%">
+                        <el-option label="飞行器" value="飞行器" />
+                        <el-option label="舰艇" value="舰艇" />
+                        <el-option label="航母" value="航母" />
+                    </el-select>
+                </el-form-item>
+
+                <el-row :gutter="20">
+                    <el-col :span="8">
+                        <el-form-item label="弹药最低数量">
+                            <el-input v-model="formData.actRequirement.capabilities.minAmmunition" placeholder="例如：1" :disabled="isReadonly">
+                                <template #append>枚</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="同时发送弹药数量">
+                            <el-input v-model="formData.actRequirement.capabilities.simultaneousAmmunition" :disabled="isReadonly"
+                                placeholder="例如：1">
+                                <template #append>枚</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="弹药类型">
+                            <el-select v-model="formData.actRequirement.capabilities.ammunitionType" :disabled="isReadonly"
+                                style="width: 100%">
+                                <el-option label="所有防空导弹" value="所有防空导弹" />
+                                <el-option label="防空导弹" value="防空导弹" />
+                                <el-option label="反舰导弹" value="反舰导弹" />
+                                <el-option label="巡航导弹" value="巡航导弹" />
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-form-item label="弹药攻击方式">
+                    <el-input v-model="formData.actRequirement.capabilities.attackMethod" :disabled="isReadonly" />
+                </el-form-item>
+
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="最小打击半径">
+                            <el-input v-model="formData.actRequirement.capabilities.minStrikeRadius" placeholder="例如：2" :disabled="isReadonly">
+                                <template #append>km</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="最大打击半径">
+                            <el-input v-model="formData.actRequirement.capabilities.maxStrikeRadius" placeholder="例如：6" :disabled="isReadonly">
+                                <template #append>km</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="20">
+                    <el-col :span="8">
+                        <el-form-item label="速度">
+                            <el-input v-model="formData.actRequirement.capabilities.speed" placeholder="例如：120" :disabled="isReadonly">
+                                <template #append>m/s</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="出航航线">
+                            <el-input v-model="formData.actRequirement.capabilities.departureRoute" :disabled="isReadonly"/>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="返航航线">
+                            <el-input v-model="formData.actRequirement.capabilities.returnRoute" :disabled="isReadonly" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-form-item label="武器航线">
+                    <el-input v-model="formData.actRequirement.capabilities.weaponRoute" :disabled="isReadonly"/>
+                </el-form-item>
+            </el-form>
+        </div>
+
+   
+        <!-- *** 核心修改：用 MapSelection 替换旧的敌方目标UI *** -->
+        <div class="form-section">
+            <h4>敌方目标</h4>
+            <!-- *** 核心修复：确保 :is-readonly="isReadonly" 存在 *** -->
+            <MapSelection 
+                v-model="formData.mapSelectedTargets"
+                mode="target"
+                :scenario-id="scenarioId" 
+                task-type="defense"
+                :side="formData.side"
+                :is-readonly="isReadonly"  
+            />
+        </div>
+
+        <!-- 毁伤率和杀伤网要求 -->
+        <div class="form-section">
+            <h4>任务要求</h4>
+            <el-form label-width="120px">
+                <el-form-item label="期望毁伤率">
+                    <el-select v-model="formData.expectedDamageRate" style="width: 200px" :disabled="isReadonly">
+                        <el-option label="仅攻击一次" value="仅攻击一次" />
+                        <el-option label="50%" value="50%" />
+                        <el-option label="70%" value="70%" />
+                        <el-option label="90%" value="90%" />
+                        <el-option label="100%" value="100%" />
+                    </el-select>
+                </el-form-item>
+
+                <el-row :gutter="20">
+                    <el-col :span="8">
+                        <el-form-item label="冗余性指标">
+                            <el-select v-model="formData.killNetRequirement.redundancy" style="width: 100%" :disabled="isReadonly">
+                                <el-option label="低" value="低" />
+                                <el-option label="中" value="中" />
+                                <el-option label="高" value="高" />
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="风险性指标">
+                            <el-select v-model="formData.killNetRequirement.risk" style="width: 100%" :disabled="isReadonly">
+                                <el-option label="低" value="低" />
+                                <el-option label="中" value="中" />
+                                <el-option label="高" value="高" />
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="敏捷性指标">
+                            <el-select v-model="formData.killNetRequirement.agility" style="width: 100%" :disabled="isReadonly">
+                                <el-option label="低" value="低" />
+                                <el-option label="中" value="中" />
+                                <el-option label="高" value="高" />
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+
+        <div class="step-actions" v-if="!isReadonly">
+            <el-button @click="$emit('back')">上一步</el-button>
+            <el-button type="primary" @click="handleNext">下一步</el-button>
+        </div>
+    </el-card>
+</template>
+
+
+
+<script setup>
+import { reactive, watch, defineProps, defineEmits } from 'vue';
+import { ElMessage } from 'element-plus';
+import { get } from 'lodash-es';
+import MapSelection from './MapSelection.vue';
+
+// 1. 定义 props
+const props = defineProps({
+    modelValue: { type: Object, default: () => ({}) },
+    isReadonly: { type: Boolean, default: false },
+    scenarioId: { type: [String, Number], required: true },
+    scenarioName: { type: String, default: '' },
+    contractType: { type: String, required: true },
+});
+
+const emit = defineEmits(['update:modelValue', 'next', 'back']);
+
+// 2. 封装初始数据和更新函数
+const createInitialData = () => ({
+    name: '',
+    description: '',
+    scenario: '对空反导',
+    operationTime: { startTime: '', endTime: '' },
+    senseRequirement: { equipmentTypes: ['飞行器', '舰艇', '航母'], capabilities: {} },
+    commandRequirement: { equipmentTypes: ['飞行器', '舰艇', '航母'], capabilities: {} },
+    actRequirement: { equipmentTypes: ['飞行器', '舰艇', '航母'], capabilities: {} },
+    killNetRequirement: { redundancy: '高', risk: '中', agility: '中' },
+    enemyTargets: [],
+    expectedDamageRate: '仅攻击一次',
+    mapSelectedTargets: [],
+    side: 'RED',
+});
+
+const formData = reactive(createInitialData());
+// 详情模式：用 newVal 的数据填充表单
+const parseUnitValue = (str) => {
+    if (!str || typeof str !== 'string') return '';
+    const match = str.match(/^(-?\d+\.?\d*)/);
+    return match ? match[0] : '';
+};
+
+watch(() => props.modelValue, (newVal) => {
+    if (!newVal || Object.keys(newVal).length === 0) {
+        Object.assign(formData, createInitialData());
+        return;
+    }
+    formData.name = get(newVal, '名称', '');
+    formData.description = get(newVal, '任务描述', '');
+    formData.scenario = get(newVal, '作战场景', '对空反导');
+    formData.operationTime.startTime = get(newVal, '作战时间.开始时间', '');
+    formData.operationTime.endTime = get(newVal, '作战时间.结束时间', '');
+
+    const senseReq = get(newVal, '感知Sense作战装备要求', {});
+    const senseCapa = get(senseReq, '能力要求', {});
+    formData.senseRequirement.equipmentTypes = get(senseReq, '类型要求', []);
+    formData.senseRequirement.capabilities.sensingRange = parseUnitValue(get(senseCapa, '感知范围'));
+    formData.senseRequirement.capabilities.accuracy = parseUnitValue(get(senseCapa, '精度'));
+    formData.senseRequirement.capabilities.speed = parseUnitValue(get(senseCapa, '速度'));
+    formData.senseRequirement.capabilities.communicationBandwidth = parseUnitValue(get(senseCapa, '通信链路带宽需求'));
+    formData.senseRequirement.capabilities.departureRoute = get(senseCapa, '出航航线', '默认');
+    formData.senseRequirement.capabilities.returnRoute = get(senseCapa, '返航航线', '默认');
+    
+    const commandReq = get(newVal, '控制Command作战装备要求', {});
+    const commandCapa = get(commandReq, '能力要求', {});
+    formData.commandRequirement.equipmentTypes = get(commandReq, '类型要求', []);
+    formData.commandRequirement.capabilities.distanceToAct = parseUnitValue(get(commandCapa, '与Act作战装备距离要求'));
+    formData.commandRequirement.capabilities.computingPower = parseUnitValue(get(commandCapa, '计算能力'));
+    formData.commandRequirement.capabilities.controlRange = parseUnitValue(get(commandCapa, '控制范围'));
+    formData.commandRequirement.capabilities.commandAccuracy = parseUnitValue(get(commandCapa, '指挥精度'));
+    formData.commandRequirement.capabilities.departureRoute = get(commandCapa, '出航航线', '默认');
+    formData.commandRequirement.capabilities.returnRoute = get(commandCapa, '返航航线', '默认');
+
+    const actReq = get(newVal, '执行Act作战装备要求', {});
+    const actCapa = get(actReq, '能力要求', {});
+    formData.actRequirement.equipmentTypes = get(actReq, '类型要求', []);
+    formData.actRequirement.capabilities.minAmmunition = parseUnitValue(get(actCapa, '弹药最低数量'));
+    formData.actRequirement.capabilities.simultaneousAmmunition = parseUnitValue(get(actCapa, '同时发送的弹药数量'));
+    formData.actRequirement.capabilities.ammunitionType = get(actCapa, '弹药类型', '');
+    formData.actRequirement.capabilities.attackMethod = get(actCapa, '弹药攻击方式', '');
+    formData.actRequirement.capabilities.minStrikeRadius = parseUnitValue(get(actCapa, '最小打击半径'));
+    formData.actRequirement.capabilities.maxStrikeRadius = parseUnitValue(get(actCapa, '最大打击半径'));
+    formData.actRequirement.capabilities.speed = parseUnitValue(get(actCapa, '速度'));
+    formData.actRequirement.capabilities.departureRoute = get(actCapa, '出航航线', '默认');
+    formData.actRequirement.capabilities.returnRoute = get(actCapa, '返航航线', '默认');
+    formData.actRequirement.capabilities.weaponRoute = get(actCapa, '武器航线', '默认');
+
+    const killNetReq = get(newVal, '杀伤网要求', {});
+    formData.killNetRequirement.redundancy = get(killNetReq, '冗余性指标[0]', '');
+    formData.killNetRequirement.risk = get(killNetReq, '风险性指标[0]', '');
+    formData.killNetRequirement.agility = get(killNetReq, '敏捷性指标[0]', '');
+
+    const details = get(newVal, 'details', {});
+    formData.side = get(details, 'side', 'RED');
+
+      // --- 填充 mapSelectedTargets 和 enemyTargets ---
+    const targetsFromModel = get(newVal, '敌方目标', []);
+    formData.enemyTargets = targetsFromModel;
+
+    if (targetsFromModel.every(t => typeof t === 'object' && t.id && t.name)) {
+        formData.mapSelectedTargets = targetsFromModel.map(t => ({ 
+            id: t.id, 
+            name: t.name,
+            lon: t.position?.[0] || null,
+            lat: t.position?.[1] || null,
+        }));
+    } else {
+        formData.mapSelectedTargets = [];
+    }
+}, { immediate: true, deep: true });
+
+// *** 核心修复 2：明确的“内部同步” watch ***
+watch(() => formData.mapSelectedTargets, (newTargetObjects) => {
+    if (props.isReadonly) return;
+
+    if (!newTargetObjects) {
+        formData.enemyTargets = [];
+        return;
+    }
+    
+    formData.enemyTargets = newTargetObjects.map(target => ({
+        name: target.name,
+        position: [
+            target.lon ? target.lon.toFixed(6) : '',
+            target.lat ? target.lat.toFixed(6) : ''
+        ],
+        id: target.id,
+    }));
+}, { deep: true });
+
+// 4. 正向转换 watch (formData -> modelValue)，在只读模式下禁用
+watch(formData, (newValue) => {
+    // 如果是只读模式，则不向父组件发送更新事件
+    if (props.isReadonly) return;
+
+    // 你的原始转换逻辑保持不变
+    const contractPartialData = {
+        合同名称: newValue.name,
+        任务描述: newValue.description,
+        作战场景: newValue.scenario,
+        作战类型: props.contractType,
+        作战时间: {
+            开始时间: newValue.operationTime.startTime,
+            结束时间: newValue.operationTime.endTime
+        },
+        "感知Sense作战装备要求": {
+            类型要求: newValue.senseRequirement.equipmentTypes,
+            能力要求: {
+                感知范围: newValue.senseRequirement.capabilities.sensingRange ? `${newValue.senseRequirement.capabilities.sensingRange} km` : '',
+                精度: newValue.senseRequirement.capabilities.accuracy ? `${newValue.senseRequirement.capabilities.accuracy} m` : '',
+                速度: newValue.senseRequirement.capabilities.speed ? `${newValue.senseRequirement.capabilities.speed} m/s` : '',
+                通信链路带宽需求: newValue.senseRequirement.capabilities.communicationBandwidth ? `${newValue.senseRequirement.capabilities.communicationBandwidth} MB/s` : '',
+                出航航线: newValue.senseRequirement.capabilities.departureRoute,
+                返航航线: newValue.senseRequirement.capabilities.returnRoute
+            }
+        },
+        "控制Command作战装备要求": {
+            类型要求: newValue.commandRequirement.equipmentTypes,
+            能力要求: {
+                "与Act作战装备距离要求": newValue.commandRequirement.capabilities.distanceToAct ? `${newValue.commandRequirement.capabilities.distanceToAct} km` : '',
+                计算能力: newValue.commandRequirement.capabilities.computingPower ? `${newValue.commandRequirement.capabilities.computingPower} GHz` : '',
+                控制范围: newValue.commandRequirement.capabilities.controlRange ? `${newValue.commandRequirement.capabilities.controlRange} km` : '',
+                指挥精度: newValue.commandRequirement.capabilities.commandAccuracy ? `${newValue.commandRequirement.capabilities.commandAccuracy} m` : '',
+                出航航线: newValue.commandRequirement.capabilities.departureRoute,
+                返航航线: newValue.commandRequirement.capabilities.returnRoute
+            }
+        },
+        "执行Act作战装备要求": {
+            类型要求: newValue.actRequirement.equipmentTypes,
+            能力要求: {
+                弹药最低数量: newValue.actRequirement.capabilities.minAmmunition ? `${newValue.actRequirement.capabilities.minAmmunition} 枚` : '',
+                同时发送的弹药数量: newValue.actRequirement.capabilities.simultaneousAmmunition ? `${newValue.actRequirement.capabilities.simultaneousAmmunition} 枚` : '',
+                弹药类型: newValue.actRequirement.capabilities.ammunitionType,
+                弹药攻击方式: newValue.actRequirement.capabilities.attackMethod,
+                最小打击半径: newValue.actRequirement.capabilities.minStrikeRadius ? `${newValue.actRequirement.capabilities.minStrikeRadius} km` : '',
+                最大打击半径: newValue.actRequirement.capabilities.maxStrikeRadius ? `${newValue.actRequirement.capabilities.maxStrikeRadius} km` : '',
+                速度: newValue.actRequirement.capabilities.speed ? `${newValue.actRequirement.capabilities.speed} m/s` : '',
+                出航航线: newValue.actRequirement.capabilities.departureRoute,
+                返航航线: newValue.actRequirement.capabilities.returnRoute,
+                武器航线: newValue.actRequirement.capabilities.weaponRoute
+            }
+        },
+        杀伤网要求: {
+            冗余性指标: [newValue.killNetRequirement.redundancy],
+            风险性指标: [newValue.killNetRequirement.risk],
+            敏捷性指标: [newValue.killNetRequirement.agility]
+        },
+        敌方目标: newValue.enemyTargets,
+        // *** 核心修改 7：提交时包含 scenarioId 和 side ***
+        scenarioId: props.scenarioId,
+        side: newValue.side,
+        期望毁伤率: [newValue.expectedDamageRate]
+    };
+
+    emit('update:modelValue',   contractPartialData);
+}, { deep: true });
+
+
+function handleNext() {
+    if (!formData.name) { ElMessage.warning('请输入合同名称'); return }
+    if (!formData.description) { ElMessage.warning('请输入任务描述'); return }
+    if (!formData.operationTime.startTime || !formData.operationTime.endTime) { ElMessage.warning('请选择作战时间'); return }
+
+    if (!formData.mapSelectedTargets || formData.mapSelectedTargets.length === 0) {
+        ElMessage.warning('请使用地图编辑器选择敌方目标');
+        return;
+    }
+    emit('next');
+}
+</script>
+
+<style scoped>
+.form-section {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-section h4 {
+    color: #000000;
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 8px;
+    border-left: 3px solid #2563eb;
+}
+
+.target-manager {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+}
+
+.target-list {
+    margin-bottom: 12px;
+}
+
+.target-item {
+    margin-bottom: 12px;
+}
+
+.target-item:last-child {
+    margin-bottom: 0;
+}
+
+.step-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #f3f4f6;
+}
+
+</style>

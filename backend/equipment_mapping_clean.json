@@ -1,0 +1,582 @@
+{
+    "11号和16号数据链舰队多卫星通信系统": {
+        "cleaned_name": "Link 11/16 数据链",
+        "type_code": "C",
+        "category_text": "数据链系统",
+        "platforms": [
+            "6"
+        ]
+    },
+    "1×“天空哨兵”相控阵雷达1× MR－710“顶板”三座标对空": {
+        "cleaned_name": "天空哨兵 相控阵雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达",
+        "platforms": [
+            "2"
+        ]
+    },
+    "MR－710“顶板”三座标对空": {
+        "cleaned_name": "MR-710 顶板 三坐标对空/对海雷达",
+        "type_code": "S",
+        "category_text": "三维搜索雷达",
+        "platforms": [
+            "2"
+        ]
+    },
+    "1座DRBN-38A導航雷達1座MRR 3D-NG對空": {
+        "cleaned_name": "DRBN-38A 导航雷达",
+        "type_code": "S",
+        "category_text": "导航雷达",
+        "platforms": [
+            "6"
+        ]
+    },
+    "MRR 3D-NG對空": {
+        "cleaned_name": "MRR 3D-NG 对空/对海雷达",
+        "type_code": "S",
+        "category_text": "三维搜索雷达",
+        "platforms": [
+            "6"
+        ]
+    },
+    "1座泰雷茲集團武仙座多功能雷达": {
+        "cleaned_name": "泰雷兹 Herakles 多功能雷达",
+        "type_code": "S",
+        "category_text": "多功能相控阵雷达",
+        "platforms": [
+            "5"
+        ]
+    },
+    "2具Terma Scanter 2001 I波段導航雷達": {
+        "cleaned_name": "Terma Scanter 2001 I波段导航雷达",
+        "type_code": "S",
+        "category_text": "导航雷达",
+        "platforms": [
+            "5"
+        ]
+    },
+    "3": {
+        "cleaned_name": null,
+        "type_code": "U",
+        "category_text": "其他",
+        "platforms": [
+            "4"
+        ]
+    },
+    "4具NGDS誘餌發射器": {
+        "cleaned_name": "NGDS 诱饵发射器",
+        "type_code": "C",
+        "category_text": "诱饵发射系统",
+        "platforms": [
+            "5"
+        ]
+    },
+    "5電子戰系統＊1AN": {
+        "cleaned_name": "SLQ-32(V)5 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "AN": {
+        "cleaned_name": null,
+        "type_code": "U",
+        "category_text": "其他",
+        "platforms": [
+            "1",
+            "4",
+            "8"
+        ]
+    },
+    "ARBR 21 偵測器ARBB 33 反制套件ARBG2 MAIGRET 攔截彈4 × Sagaie 誘餌發射器SLAT 魚雷反制套件": {
+        "cleaned_name": "ARBR 21 侦测器",
+        "type_code": "S",
+        "category_text": "电子侦察系统",
+        "platforms": [
+            "3"
+        ]
+    },
+    "ARBB 33 反制套件": {
+        "cleaned_name": "ARBB 33 反制套件",
+        "type_code": "C",
+        "category_text": "电子对抗系统",
+        "platforms": [
+            "3"
+        ]
+    },
+    "ARBG2 MAIGRET 拦截弹": {
+        "cleaned_name": "ARBG2 MAIGRET 拦截弹",
+        "type_code": "A",
+        "category_text": "拦截弹",
+        "platforms": [
+            "3"
+        ]
+    },
+    "Sagaie 誘餌發射器": {
+        "cleaned_name": "Sagaie 诱饵发射器",
+        "type_code": "C",
+        "category_text": "诱饵发射系统",
+        "platforms": [
+            "3"
+        ]
+    },
+    "SLAT 魚雷反制套件": {
+        "cleaned_name": "SLAT 鱼雷反制系统",
+        "type_code": "C",
+        "category_text": "鱼雷对抗系统",
+        "platforms": [
+            "3",
+            "5"
+        ]
+    },
+    "DRBV 26D 對空搜索雷達DRBV 15C 低空搜索雷達 SMART-S Mk2相位陣列雷達Arabel 目標照明雷達DRBJ 11 B 三維對空搜索雷達（已拆除）": {
+        "cleaned_name": "DRBV 26D 对空搜索雷达",
+        "type_code": "S",
+        "category_text": "二维对空搜索雷达",
+        "platforms": [
+            "3"
+        ]
+    },
+    "DRBV 15C 低空搜索雷達": {
+        "cleaned_name": "DRBV 15C 低空搜索雷达",
+        "type_code": "S",
+        "category_text": "低空搜索雷达",
+        "platforms": [
+            "3"
+        ]
+    },
+    "SMART-S Mk2相位陣列雷達": {
+        "cleaned_name": "SMART-S Mk2 相控阵雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达",
+        "platforms": [
+            "3"
+        ]
+    },
+    "Arabel 目標照明雷達": {
+        "cleaned_name": "Arabel 目标照明雷达",
+        "type_code": "S",
+        "category_text": "火控/照明雷达",
+        "platforms": [
+            "3"
+        ]
+    },
+    "DRBJ 11 B 三維對空搜索雷達": {
+        "cleaned_name": "DRBJ 11 B 三维对空搜索雷达",
+        "type_code": "S",
+        "category_text": "三维对空搜索雷达",
+        "platforms": [
+            "3"
+        ]
+    },
+    "II構型)AN": {
+        "cleaned_name": null,
+        "type_code": "U",
+        "category_text": "其他",
+        "platforms": [
+            "4"
+        ]
+    },
+    "Mod 1（DDG-85~）光電射控儀＊1AN": {
+        "cleaned_name": "MK-46 Mod 1 光电射控仪",
+        "type_code": "S",
+        "category_text": "光电火控系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "PAAMS": {
+        "cleaned_name": "PAAMS (主防空导弹系统)",
+        "type_code": "A",
+        "category_text": "舰载防空系统",
+        "platforms": [
+            "5",
+            "9"
+        ]
+    },
+    "SAMPSON多重目標追蹤雷達S1850M 3D對空搜索雷達": {
+        "cleaned_name": "SAMPSON 多功能雷达",
+        "type_code": "S",
+        "category_text": "多功能相控阵雷达",
+        "platforms": [
+            "9"
+        ]
+    },
+    "S1850M 3D對空搜索雷達": {
+        "cleaned_name": "S1850M 三维对空搜索雷达",
+        "type_code": "S",
+        "category_text": "三维对空搜索雷达",
+        "platforms": [
+            "9"
+        ]
+    },
+    "SLAT魚雷反制系統": {
+        "cleaned_name": "SLAT 鱼雷反制系统",
+        "type_code": "C",
+        "category_text": "鱼雷对抗系统",
+        "platforms": [
+            "5"
+        ]
+    },
+    "SLQ-25魚雷反制系統＊1AN": {
+        "cleaned_name": "SLQ-25 Nixie 鱼雷诱饵",
+        "type_code": "C",
+        "category_text": "鱼雷诱饵",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SLQ-32(V)2": {
+        "cleaned_name": "SLQ-32(V)2 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SLQ-32(V)7電子戰系統＊1 (DDG-91)MK-36 Mod6干擾彈發射器＊6（SRBOC）MK-53 Nulka主動式誘餌發射器＊4（2000年代陸續加裝）MK-59充氣式水面誘餌發射器＊4（2013年起陸續加裝）AN": {
+        "cleaned_name": "SLQ-32(V)7 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "MK-36 Mod6干擾彈發射器": {
+        "cleaned_name": "MK-36 SRBOC 干扰弹发射器",
+        "type_code": "C",
+        "category_text": "干扰弹发射系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "MK-53 Nulka主動式誘餌發射器": {
+        "cleaned_name": "MK-53 Nulka 主动式诱饵发射器",
+        "type_code": "C",
+        "category_text": "主动诱饵发射系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "MK-59充氣式水面誘餌發射器": {
+        "cleaned_name": "MK-59 充气式水面诱饵发射器",
+        "type_code": "C",
+        "category_text": "水面诱饵系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SLQ-32A(V)4电战反制系统SLQ-25A Nixie鱼雷反制系统": {
+        "cleaned_name": "SLQ-32A(V)4 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SLQ-25A Nixie鱼雷反制系统": {
+        "cleaned_name": "SLQ-25 Nixie 鱼雷诱饵",
+        "type_code": "C",
+        "category_text": "鱼雷诱饵",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SMQ-765 EW電子戰系統（包含JASS電子反制系統與Nettuno 4100電子截收系統）": {
+        "cleaned_name": "Sigen MM/SMQ-765 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统",
+        "platforms": [
+            "5"
+        ]
+    },
+    "SPG-62照射器＊3AN": {
+        "cleaned_name": "SPG-62 照射雷达",
+        "type_code": "S",
+        "category_text": "火控/照明雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SPN-41着陆辅助雷达4个Mk 91 NSSM引导系统4个Mk 95雷达": {
+        "cleaned_name": "SPN-41 着陆辅助雷达",
+        "type_code": "S",
+        "category_text": "着舰引导雷达",
+        "platforms": [
+            "1"
+        ]
+    },
+    "Mk 91 NSSM引导系统": {
+        "cleaned_name": "Mk 91 NSSM 引导系统",
+        "type_code": "A",
+        "category_text": "导弹火控系统",
+        "platforms": [
+            "1"
+        ]
+    },
+    "Mk 95雷达": {
+        "cleaned_name": "Mk 95 雷达",
+        "type_code": "S",
+        "category_text": "火控雷达",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SPN-43C空中管制雷达AN": {
+        "cleaned_name": "SPN-43C 空中管制雷达",
+        "type_code": "S",
+        "category_text": "空中交通管制雷达",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SPN-46空中管制雷达AN": {
+        "cleaned_name": "SPN-46 空中管制雷达",
+        "type_code": "S",
+        "category_text": "空中交通管制雷达",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SPQ-9B": {
+        "cleaned_name": "SPQ-9B 目标截获雷达",
+        "type_code": "S",
+        "category_text": "目标截获雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SPQ-9B目标截获雷达AN": {
+        "cleaned_name": "SPQ-9B 目标截获雷达",
+        "type_code": "S",
+        "category_text": "目标截获雷达",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SPS-48E 3-D空中搜索雷达AN": {
+        "cleaned_name": "SPS-48E 三维空中搜索雷达",
+        "type_code": "S",
+        "category_text": "三维对空搜索雷达",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SPS-49(V)5 2-D空中搜索雷达AN": {
+        "cleaned_name": "SPS-49 二维空中搜索雷达",
+        "type_code": "S",
+        "category_text": "二维对空搜索雷达",
+        "platforms": [
+            "1"
+        ]
+    },
+    "SPS-64(V)9航海雷達＊1(裝備於DDG-51~86)Decca Bridge Master E航海雷達＊1(DDG-87起裝備)Prairie Masker氣泡幕噪音抑制系統AN": {
+        "cleaned_name": "SPS-64(V)9 航海雷达",
+        "type_code": "S",
+        "category_text": "导航雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "Decca Bridge Master E航海雷達": {
+        "cleaned_name": "Decca Bridge Master E 航海雷达",
+        "type_code": "S",
+        "category_text": "导航雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "Prairie Masker氣泡幕噪音抑制系統": {
+        "cleaned_name": "Prairie Masker 气泡幕噪音抑制系统",
+        "type_code": "C",
+        "category_text": "声学隐身系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SPS-67(V)3平面搜索雷達＊1AN": {
+        "cleaned_name": "SPS-67(V)3 平面搜索雷达",
+        "type_code": "S",
+        "category_text": "平面搜索雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SPY-1D(V)對空搜索雷達(固定式陣列天線＊4)（DDG-91~124,DDG-127)AN": {
+        "cleaned_name": "SPY-1D(V) 对空搜索雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SPY-1D對空搜索雷達(固定式陣列天線＊4)(DDG-51~90）AN": {
+        "cleaned_name": "SPY-1D 对空搜索雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SPY-3多功能電子掃描陣列雷達（MFR，X-波段）音量掃描陣列雷達（VSR，S-波段）": {
+        "cleaned_name": "SPY-3 多功能雷达",
+        "type_code": "S",
+        "category_text": "多功能相控阵雷达",
+        "platforms": [
+            "8"
+        ]
+    },
+    "SPY-6(V)1对空搜索雷达(固定式陣列天線＊4)（DDG-125起，DDG-127除外）AN": {
+        "cleaned_name": "SPY-6(V)1 对空搜索雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SQR-19拖曳陣列聲納(Flight I": {
+        "cleaned_name": "SQR-19 拖曳阵声纳",
+        "type_code": "S",
+        "category_text": "拖曳阵声纳",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SQR-20（TB-37U）拖曳陣列聲納＊1(DDG-113起)AN": {
+        "cleaned_name": "SQR-20 拖曳阵声纳",
+        "type_code": "S",
+        "category_text": "拖曳阵声纳",
+        "platforms": [
+            "4"
+        ]
+    },
+    "SQS-53C聲納AN": {
+        "cleaned_name": "SQS-53C 舰壳声纳",
+        "type_code": "S",
+        "category_text": "舰壳声纳",
+        "platforms": [
+            "4"
+        ]
+    },
+    "Sigen MM": {
+        "cleaned_name": "Sigen MM/SMQ-765 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统",
+        "platforms": [
+            "5"
+        ]
+    },
+    "WLD-1遙控獵雷載具(DDG-91~96)": {
+        "cleaned_name": "WLD-1 遥控猎雷载具",
+        "type_code": "A",
+        "category_text": "无人猎雷系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "X波段追蹤雷達＊1（经AMDR升级的驱逐舰均换装，DDG-125起SPQ-9B與AMDR-S雷達由同一控制器控制）MK-46 Mod 0（DDG-51~84）": {
+        "cleaned_name": "X波段追踪雷达",
+        "type_code": "S",
+        "category_text": "火控雷达",
+        "platforms": [
+            "4"
+        ]
+    },
+    "MK-46 Mod 0光電射控儀": {
+        "cleaned_name": "MK-46 Mod 0 光电射控仪",
+        "type_code": "S",
+        "category_text": "光电火控系统",
+        "platforms": [
+            "4"
+        ]
+    },
+    "对海雷达2×MR－320M“双支撑”对海雷达4× MR－360“十字剑”火控雷达（用于SA－N－9）8× 3P37“热闪”火控雷达（用于SA－N－11）1×“蛋糕台”战术空中导航雷达": {
+        "cleaned_name": "MR-320M 双支撑 对海雷达",
+        "type_code": "S",
+        "category_text": "平面搜索雷达",
+        "platforms": [
+            "2"
+        ]
+    },
+    "MR－360“十字剑”火控雷达": {
+        "cleaned_name": "MR-360 十字剑 火控雷达",
+        "type_code": "S",
+        "category_text": "火控雷达",
+        "platforms": [
+            "2"
+        ]
+    },
+    "3P37“热闪”火控雷达": {
+        "cleaned_name": "3P37 热闪 火控雷达",
+        "type_code": "S",
+        "category_text": "火控雷达",
+        "platforms": [
+            "2"
+        ]
+    },
+    "“蛋糕台”战术空中导航雷达": {
+        "cleaned_name": "蛋糕台 战术空中导航系统",
+        "type_code": "S",
+        "category_text": "战术空中导航系统",
+        "platforms": [
+            "2"
+        ]
+    },
+    "對海雷達": {
+        "cleaned_name": null,
+        "type_code": "U",
+        "category_text": "其他",
+        "platforms": [
+            "6"
+        ]
+    },
+    "干擾箔條發射器": {
+        "cleaned_name": "干扰箔条发射器",
+        "type_code": "C",
+        "category_text": "干扰弹发射系统",
+        "platforms": [
+            "6"
+        ]
+    },
+    "泰雷茲集團 Artemis紅外線搜索追蹤系統（IRST）": {
+        "cleaned_name": "泰雷兹 Artemis 红外搜索跟踪系统",
+        "type_code": "S",
+        "category_text": "红外搜索与跟踪(IRST)",
+        "platforms": [
+            "5"
+        ]
+    },
+    "泰雷茲集團 BMS 4110CL低頻艦首主": {
+        "cleaned_name": "泰雷兹 BMS 4110CL 低频舰首声纳",
+        "type_code": "S",
+        "category_text": "舰壳声纳",
+        "platforms": [
+            "5"
+        ]
+    },
+    "海蚊飛彈誘導系統SSTDS水下誘餌": {
+        "cleaned_name": "海蚊导弹诱饵系统",
+        "type_code": "C",
+        "category_text": "导弹诱饵",
+        "platforms": [
+            "9"
+        ]
+    },
+    "SSTDS水下誘餌": {
+        "cleaned_name": "SSTDS 水下诱饵",
+        "type_code": "C",
+        "category_text": "鱼雷诱饵",
+        "platforms": [
+            "9"
+        ]
+    },
+    "被動聲納": {
+        "cleaned_name": null,
+        "type_code": "U",
+        "category_text": "其他",
+        "platforms": [
+            "5"
+        ]
+    }
+}

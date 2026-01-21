@@ -1,0 +1,162 @@
+[
+    {
+        "id": 1,
+        "name": "尼米兹号航空母舰",
+        "category": "舰艇",
+        "model_type": "航空母舰",
+        "country": "美国",
+        "service_date": "1975年"
+    },
+    {
+        "id": 2,
+        "name": "库兹涅佐夫号航空母舰",
+        "category": "舰艇",
+        "model_type": "航空母舰",
+        "country": "俄罗斯",
+        "service_date": "1991年"
+    },
+    {
+        "id": 3,
+        "name": "戴高乐号航空母舰",
+        "category": "舰艇",
+        "model_type": "航空母舰",
+        "country": "法国",
+        "service_date": "2001年"
+    },
+    {
+        "id": 4,
+        "name": "阿利伯克级驱逐舰",
+        "category": "舰艇",
+        "model_type": "驱逐舰",
+        "country": "美国",
+        "service_date": "1988年起"
+    },
+    {
+        "id": 5,
+        "name": "阿基坦级巡防舰",
+        "category": "舰艇",
+        "model_type": "巡防舰",
+        "country": "法国",
+        "service_date": "2012年起"
+    },
+    {
+        "id": 6,
+        "name": "西北风级两栖攻击舰",
+        "category": "舰艇",
+        "model_type": "攻击舰",
+        "country": "法国",
+        "service_date": "2005年起"
+    },
+    {
+        "id": 7,
+        "name": "弗吉尼亚级核潜艇",
+        "category": "舰艇",
+        "model_type": "核潜艇",
+        "country": "美国",
+        "service_date": "信息不详"
+    },
+    {
+        "id": 8,
+        "name": "朱姆沃尔特级驱逐舰",
+        "category": "舰艇",
+        "model_type": "驱逐舰",
+        "country": "美国",
+        "service_date": "信息不详"
+    },
+    {
+        "id": 9,
+        "name": "45型驱逐舰",
+        "category": "舰艇",
+        "model_type": "驱逐舰",
+        "country": "英国",
+        "service_date": "信息不详"
+    },
+    {
+        "id": 10,
+        "name": "元级潜艇",
+        "category": "舰艇",
+        "model_type": "潜艇",
+        "country": "中国",
+        "service_date": "信息不详"
+    },
+    {
+        "id": 11,
+        "name": "凯旋级核潜艇",
+        "category": "舰艇",
+        "model_type": "核潜艇",
+        "country": "法国",
+        "service_date": "信息不详"
+    },
+    {
+        "id": 12,
+        "name": "F-22猛禽战斗机",
+        "category": "飞机",
+        "model_type": "战斗机",
+        "country": "美国",
+        "service_date": "2005年"
+    },
+    {
+        "id": 13,
+        "name": "F-35闪电II战斗机",
+        "category": "飞机",
+        "model_type": "战斗机",
+        "country": "美国",
+        "service_date": "2015年"
+    },
+    {
+        "id": 14,
+        "name": "F-16战隼战斗机",
+        "category": "飞机",
+        "model_type": "战斗机",
+        "country": "美国",
+        "service_date": "1978年"
+    },
+    {
+        "id": 15,
+        "name": "F-14雄猫式战斗机",
+        "category": "飞机",
+        "model_type": "战斗机",
+        "country": "美国",
+        "service_date": "1974年"
+    },
+    {
+        "id": 16,
+        "name": "A-10雷电二式攻击机",
+        "category": "飞机",
+        "model_type": "攻击机",
+        "country": "美国",
+        "service_date": "1977年"
+    },
+    {
+        "id": 17,
+        "name": "C-130运输机",
+        "category": "飞机",
+        "model_type": "运输机",
+        "country": "美国",
+        "service_date": "1956年"
+    },
+    {
+        "id": 18,
+        "name": "MQ-9收割者侦察机",
+        "category": "飞机",
+        "model_type": "无人机",
+        "country": "美国",
+        "service_date": "2000年起"
+    },
+    {
+        "id": 19,
+        "name": "AH-64阿帕契直升机",
+        "category": "飞机",
+        "model_type": "直升机",
+        "country": "美国",
+        "service_date": "1986年"
+    },
+    {
+        "id": 20,
+        "name": "E-3空中预警机",
+        "category": "飞机",
+        "model_type": "预警机",
+        "country": "美国",
+        "service_date": "1977年"
+    }
+]

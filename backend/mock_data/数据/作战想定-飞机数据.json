@@ -1,0 +1,292 @@
+{
+  "1": {
+    "vehicle": {
+      "name": "F-22 Raptor",
+      "params": {
+        "weight": "19,700 kg",
+        "maxSpeed": "2,414 km/h",
+        "cruiseSpeed": "1,963 km/h",
+        "range": "2,960 km",
+        "serviceCeiling": "20,000 m",
+        "armament": "1× 20 mm机炮, 6× AIM-120 AMRAAM, 2× AIM-9 Sidewinder"
+      }
+    },
+    "equipment": [
+      {
+        "name": "响尾蛇导弹",
+        "type": "missile"
+      },
+      {
+        "name": "AIM-120 AMRAAM导弹",
+        "type": "missile"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      },
+      {
+        "name": "20 mm机炮",
+        "type": "cannon"
+      }
+    ]
+  },
+  "2": {
+    "vehicle": {
+      "name": "B-2 Spirit",
+      "params": {
+        "weight": "170,600 kg",
+        "maxSpeed": "1,010 km/h",
+        "cruiseSpeed": "900 km/h",
+        "range": "11,100 km",
+        "serviceCeiling": "15,000 m",
+        "armament": "16× B83核炸弹, 80× 500磅JDAM, 16× AGM-129 ACM"
+      }
+    },
+    "equipment": [
+      {
+        "name": "B83核炸弹",
+        "type": "bomb"
+      },
+      {
+        "name": "JDAM",
+        "type": "bomb"
+      },
+      {
+        "name": "AGM-129 ACM",
+        "type": "missile"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      }
+    ]
+  },
+  "3": {
+    "vehicle": {
+      "name": "F-35 Lightning",
+      "params": {
+        "weight": "13,290 kg",
+        "maxSpeed": "1,930 km/h",
+        "cruiseSpeed": "1,470 km/h",
+        "range": "2,220 km",
+        "serviceCeiling": "15,240 m",
+        "armament": "1× 25 mm GAU-22/A机炮, 4× AIM-120 AMRAAM, 2× GBU-31 JDAM"
+      }
+    },
+    "equipment": [
+      {
+        "name": "AIM-120 AMRAAM导弹",
+        "type": "missile"
+      },
+      {
+        "name": "GBU-31 JDAM",
+        "type": "bomb"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      },
+      {
+        "name": "25 mm GAU-22/A机炮",
+        "type": "cannon"
+      }
+    ]
+  },
+  "4": {
+    "vehicle": {
+      "name": "F16",
+      "params": {
+        "weight": "9,207 kg",
+        "maxSpeed": "2,414 km/h",
+        "cruiseSpeed": "1,500 km/h",
+        "range": "4,220 km",
+        "serviceCeiling": "15,240 m",
+        "armament": "1× 20 mm M61A1 Vulcan机炮, 6× AIM-120 AMRAAM, 2× GBU-12 Paveway II"
+      }
+    },
+    "equipment": [
+      {
+        "name": "AIM-120 AMRAAM导弹",
+        "type": "missile"
+      },
+      {
+        "name": "GBU-12 Paveway II",
+        "type": "bomb"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      },
+      {
+        "name": "20 mm M61A1 Vulcan机炮",
+        "type": "cannon"
+      }
+    ]
+  },
+  "5": {
+    "vehicle": {
+      "name": "F14",
+      "params": {
+        "weight": "19,838 kg",
+        "maxSpeed": "2,485 km/h",
+        "cruiseSpeed": "1,850 km/h",
+        "range": "3,200 km",
+        "serviceCeiling": "16,000 m",
+        "armament": "1× 20 mm M61A1 Vulcan机炮, 6× AIM-54 Phoenix, 2× AIM-7 Sparrow"
+      }
+    },
+    "equipment": [
+      {
+        "name": "AIM-54 Phoenix导弹",
+        "type": "missile"
+      },
+      {
+        "name": "AIM-7 Sparrow导弹",
+        "type": "missile"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      },
+      {
+        "name": "20 mm M61A1 Vulcan机炮",
+        "type": "cannon"
+      }
+    ]
+  },
+  "6": {
+    "vehicle": {
+      "name": "A10",
+      "params": {
+        "weight": "11,321 kg",
+        "maxSpeed": "706 km/h",
+        "cruiseSpeed": "560 km/h",
+        "range": "1,290 km",
+        "serviceCeiling": "13,636 m",
+        "armament": "1× 30 mm GAU-8/A Avenger机炮, AGM-65 Maverick, Mk 82炸弹"
+      }
+    },
+    "equipment": [
+      {
+        "name": "AGM-65 Maverick导弹",
+        "type": "missile"
+      },
+      {
+        "name": "Mk 82炸弹",
+        "type": "bomb"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      },
+      {
+        "name": "30 mm GAU-8/A Avenger机炮",
+        "type": "cannon"
+      }
+    ]
+  },
+  "7": {
+    "vehicle": {
+      "name": "C-130 Hercules",
+      "params": {
+        "weight": "34,686 kg",
+        "maxSpeed": "671 km/h",
+        "cruiseSpeed": "540 km/h",
+        "range": "3,800 km",
+        "serviceCeiling": "10,060 m",
+        "armament": "无"
+      }
+    },
+    "equipment": [
+      {
+        "name": "货舱",
+        "type": "cargo"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      }
+    ]
+  },
+  "8": {
+    "vehicle": {
+      "name": "MQ-9 Reaper",
+      "params": {
+        "weight": "2,223 kg",
+        "maxSpeed": "482 km/h",
+        "cruiseSpeed": "313 km/h",
+        "range": "1,850 km",
+        "serviceCeiling": "15,240 m",
+        "armament": "4× AGM-114 Hellfire导弹, GBU-12 Paveway II"
+      }
+    },
+    "equipment": [
+      {
+        "name": "AGM-114 Hellfire导弹",
+        "type": "missile"
+      },
+      {
+        "name": "GBU-12 Paveway II",
+        "type": "bomb"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      }
+    ]
+  },
+  "9": {
+    "vehicle": {
+      "name": "AH-64 Apache",
+      "params": {
+        "weight": "5,165 kg",
+        "maxSpeed": "293 km/h",
+        "cruiseSpeed": "265 km/h",
+        "range": "476 km",
+        "serviceCeiling": "6,400 m",
+        "armament": "16× AGM-114 Hellfire导弹, 70 mm Hydra火箭, 1× 30mm M230 Chain Gun"
+      }
+    },
+    "equipment": [
+      {
+        "name": "AGM-114 Hellfire导弹",
+        "type": "missile"
+      },
+      {
+        "name": "70 mm Hydra火箭",
+        "type": "rocket"
+      },
+      {
+        "name": "30 mm M230 Chain Gun",
+        "type": "cannon"
+      },
+      {
+        "name": "雷达",
+        "type": "radar"
+      }
+    ]
+  },
+  "10": {
+    "vehicle": {
+      "name": "E-3 Sentry",
+      "params": {
+        "weight": "152,400 kg",
+        "maxSpeed": "853 km/h",
+        "cruiseSpeed": "760 km/h",
+        "range": "7,400 km",
+        "serviceCeiling": "9,144 m",
+        "armament": "无"
+      }
+    },
+    "equipment": [
+      {
+        "name": "雷达",
+        "type": "radar"
+      },
+      {
+        "name": "通信系统",
+        "type": "communication"
+      }
+    ]
+  }
+}

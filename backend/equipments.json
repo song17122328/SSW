@@ -1,0 +1,282 @@
+[
+    {
+        "name": "ARBR 21 侦测器",
+        "type_code": "S",
+        "category_text": "电子侦察系统"
+    },
+    {
+        "name": "ARBB 33 反制套件",
+        "type_code": "C",
+        "category_text": "电子对抗系统"
+    },
+    {
+        "name": "ARBG2 MAIGRET 拦截弹",
+        "type_code": "A",
+        "category_text": "拦截弹"
+    },
+    {
+        "name": "Sagaie 诱饵发射器",
+        "type_code": "C",
+        "category_text": "诱饵发射系统"
+    },
+    {
+        "name": "DRBN-38A 导航雷达",
+        "type_code": "S",
+        "category_text": "导航雷达"
+    },
+    {
+        "name": "MRR 3D-NG 对空/对海雷达",
+        "type_code": "S",
+        "category_text": "三维搜索雷达"
+    },
+    {
+        "name": "DRBV 26D 对空搜索雷达",
+        "type_code": "S",
+        "category_text": "二维对空搜索雷达"
+    },
+    {
+        "name": "DRBV 15C 低空搜索雷达",
+        "type_code": "S",
+        "category_text": "低空搜索雷达"
+    },
+    {
+        "name": "SMART-S Mk2 相控阵雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达"
+    },
+    {
+        "name": "Arabel 目标照明雷达",
+        "type_code": "S",
+        "category_text": "火控/照明雷达"
+    },
+    {
+        "name": "DRBJ 11 B 三维对空搜索雷达",
+        "type_code": "S",
+        "category_text": "三维对空搜索雷达"
+    },
+    {
+        "name": "MK-46 Mod 1 光电射控仪",
+        "type_code": "S",
+        "category_text": "光电火控系统"
+    },
+    {
+        "name": "NGDS 诱饵发射器",
+        "type_code": "C",
+        "category_text": "诱饵发射系统"
+    },
+    {
+        "name": "PAAMS (主防空导弹系统)",
+        "type_code": "A",
+        "category_text": "舰载防空系统"
+    },
+    {
+        "name": "SAMPSON 多功能雷达",
+        "type_code": "S",
+        "category_text": "多功能相控阵雷达"
+    },
+    {
+        "name": "S1850M 三维对空搜索雷达",
+        "type_code": "S",
+        "category_text": "三维对空搜索雷达"
+    },
+    {
+        "name": "SLAT 鱼雷反制系统",
+        "type_code": "C",
+        "category_text": "鱼雷对抗系统"
+    },
+    {
+        "name": "SLQ-25 Nixie 鱼雷诱饵",
+        "type_code": "C",
+        "category_text": "鱼雷诱饵"
+    },
+    {
+        "name": "SLQ-32 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统"
+    },
+    {
+        "name": "MK-36 SRBOC 干扰弹发射器",
+        "type_code": "C",
+        "category_text": "干扰弹发射系统"
+    },
+    {
+        "name": "MK-53 Nulka 主动式诱饵发射器",
+        "type_code": "C",
+        "category_text": "主动诱饵发射系统"
+    },
+    {
+        "name": "MK-59 充气式水面诱饵发射器",
+        "type_code": "C",
+        "category_text": "水面诱饵系统"
+    },
+    {
+        "name": "Sigen MM/SMQ-765 电子战系统",
+        "type_code": "C",
+        "category_text": "电子战系统"
+    },
+    {
+        "name": "SPG-62 照射雷达",
+        "type_code": "S",
+        "category_text": "火控/照明雷达"
+    },
+    {
+        "name": "SPN-41 着陆辅助雷达",
+        "type_code": "S",
+        "category_text": "着舰引导雷达"
+    },
+    {
+        "name": "Mk 91 NSSM 引导系统",
+        "type_code": "A",
+        "category_text": "导弹火控系统"
+    },
+    {
+        "name": "Mk 95 雷达",
+        "type_code": "S",
+        "category_text": "火控雷达"
+    },
+    {
+        "name": "SPN-43C 空中管制雷达",
+        "type_code": "S",
+        "category_text": "空中交通管制雷达"
+    },
+    {
+        "name": "SPN-46 空中管制雷达",
+        "type_code": "S",
+        "category_text": "空中交通管制雷达"
+    },
+    {
+        "name": "SPQ-9B 目标截获雷达",
+        "type_code": "S",
+        "category_text": "目标截获雷达"
+    },
+    {
+        "name": "SPS-48E 三维空中搜索雷达",
+        "type_code": "S",
+        "category_text": "三维对空搜索雷达"
+    },
+    {
+        "name": "SPS-49 二维空中搜索雷达",
+        "type_code": "S",
+        "category_text": "二维对空搜索雷达"
+    },
+    {
+        "name": "Decca Bridge Master E 航海雷达",
+        "type_code": "S",
+        "category_text": "导航雷达"
+    },
+    {
+        "name": "Prairie Masker 气泡幕噪音抑制系统",
+        "type_code": "C",
+        "category_text": "声学隐身系统"
+    },
+    {
+        "name": "SPS-67 平面搜索雷达",
+        "type_code": "S",
+        "category_text": "平面搜索雷达"
+    },
+    {
+        "name": "SPY-1D 对空搜索雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达"
+    },
+    {
+        "name": "SPY-3 多功能雷达",
+        "type_code": "S",
+        "category_text": "多功能相控阵雷达"
+    },
+    {
+        "name": "SPY-6 对空搜索雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达"
+    },
+    {
+        "name": "SQR-19 拖曳阵声纳",
+        "type_code": "S",
+        "category_text": "拖曳阵声纳"
+    },
+    {
+        "name": "SQR-20 拖曳阵声纳",
+        "type_code": "S",
+        "category_text": "拖曳阵声纳"
+    },
+    {
+        "name": "SQS-53C 舰壳声纳",
+        "type_code": "S",
+        "category_text": "舰壳声纳"
+    },
+    {
+        "name": "Terma Scanter 2001 I波段导航雷达",
+        "type_code": "S",
+        "category_text": "导航雷达"
+    },
+    {
+        "name": "WLD-1 遥控猎雷载具",
+        "type_code": "A",
+        "category_text": "无人猎雷系统"
+    },
+    {
+        "name": "天空哨兵 相控阵雷达",
+        "type_code": "S",
+        "category_text": "相控阵雷达"
+    },
+    {
+        "name": "MR-710 顶板 三坐标对空/对海雷达",
+        "type_code": "S",
+        "category_text": "三维搜索雷达"
+    },
+    {
+        "name": "11号和16号数据链",
+        "type_code": "C",
+        "category_text": "数据链系统"
+    },
+    {
+        "name": "MR-320M 双支撑 对海雷达",
+        "type_code": "S",
+        "category_text": "平面搜索雷达"
+    },
+    {
+        "name": "MR-360 十字剑 火控雷达",
+        "type_code": "S",
+        "category_text": "火控雷达"
+    },
+    {
+        "name": "3P37 热闪 火控雷达",
+        "type_code": "S",
+        "category_text": "火控雷达"
+    },
+    {
+        "name": "蛋糕台 战术空中导航雷达",
+        "type_code": "S",
+        "category_text": "战术空中导航系统"
+    },
+    {
+        "name": "干扰箔条发射器",
+        "type_code": "C",
+        "category_text": "干扰弹发射系统"
+    },
+    {
+        "name": "泰雷兹 Artemis 红外搜索跟踪系统",
+        "type_code": "S",
+        "category_text": "红外搜索与跟踪(IRST)"
+    },
+    {
+        "name": "泰雷兹 BMS 4110CL 低频舰首声纳",
+        "type_code": "S",
+        "category_text": "舰壳声纳"
+    },
+    {
+        "name": "泰雷兹 Herakles 多功能雷达",
+        "type_code": "S",
+        "category_text": "多功能相控阵雷达"
+    },
+    {
+        "name": "海蚊导弹诱饵系统",
+        "type_code": "C",
+        "category_text": "导弹诱饵"
+    },
+    {
+        "name": "SSTDS 水下诱饵",
+        "type_code": "C",
+        "category_text": "鱼雷诱饵"
+    }
+]

@@ -1,0 +1,449 @@
+[
+  {
+    "id": 1,
+    "name": "尼米兹号航空母舰",
+    "type": "航空母舰",
+    "description": "尼米兹号航空母舰是美国海军的核动力超级航空母舰，具备强大的作战能力和航程。",
+    "params": {
+      "standardDisplacement": "83,000 吨",
+      "fullLoadDisplacement": "97,000 吨",
+      "maxSpeed": "56 公里/小时",
+      "range": "无限 (核动力)",
+      "armament": "舰空导弹, 方阵近防系统, 90 架飞机"
+    },
+    "equipment": [
+      {
+        "name": "舰空导弹",
+        "type": "missile"
+      },
+      {
+        "name": "方阵近防系统",
+        "type": "defense system"
+      },
+      {
+        "name": "F/A-18 大黄蜂",
+        "type": "aircraft"
+      },
+      {
+        "name": "E-2 '鹰眼' 预警机",
+        "type": "aircraft"
+      },
+      {
+        "name": "F-22 '猛禽' 战斗机",
+        "type": "aircraft"
+      },
+      {
+        "name": "F-35 '闪电' 战斗机",
+        "type": "aircraft"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "伊丽莎白女王号航空母舰",
+    "type": "航空母舰",
+    "description": "伊丽莎白女王号航空母舰是英国皇家海军的主力航空母舰，具备现代化的设计和强大的战斗力。",
+    "params": {
+      "standardDisplacement": "65,000 吨",
+      "fullLoadDisplacement": "72,000 吨",
+      "maxSpeed": "48 公里/小时",
+      "range": "19,000 公里",
+      "armament": "方阵近防系统, F-35B 闪电 II, 梅林直升机"
+    },
+    "equipment": [
+      {
+        "name": "方阵近防系统",
+        "type": "defense system"
+      },
+      {
+        "name": "F-35B 闪电 II",
+        "type": "aircraft"
+      },
+      {
+        "name": "梅林直升机",
+        "type": "helicopter"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "库兹涅佐夫号航空母舰",
+    "type": "航空母舰",
+    "description": "库兹涅佐夫号航空母舰是俄罗斯海军的旗舰，具备强大的防空和反舰能力。",
+    "params": {
+      "standardDisplacement": "55,000 吨",
+      "fullLoadDisplacement": "58,600 吨",
+      "maxSpeed": "55 公里/小时",
+      "range": "13,000 公里",
+      "armament": "P-700 花岗岩导弹, AK-630 近防系统, Su-33 飞机"
+    },
+    "equipment": [
+      {
+        "name": "P-700 花岗岩导弹",
+        "type": "missile"
+      },
+      {
+        "name": "AK-630 近防系统",
+        "type": "defense system"
+      },
+      {
+        "name": "Su-33 飞机",
+        "type": "aircraft"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "维克拉玛蒂亚号航空母舰",
+    "type": "航空母舰",
+    "description": "维克拉玛蒂亚号航空母舰是印度海军的主力航空母舰，具备强大的作战能力。",
+    "params": {
+      "standardDisplacement": "45,400 吨",
+      "fullLoadDisplacement": "49,000 吨",
+      "maxSpeed": "56 公里/小时",
+      "range": "25,000 公里",
+      "armament": "巴拉克 8, RBU-6000, 米格-29K 飞机"
+    },
+    "equipment": [
+      {
+        "name": "巴拉克 8 导弹",
+        "type": "missile"
+      },
+      {
+        "name": "RBU-6000",
+        "type": "anti-submarine system"
+      },
+      {
+        "name": "米格-29K 飞机",
+        "type": "aircraft"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "戴高乐号航空母舰",
+    "type": "航空母舰",
+    "description": "戴高乐号航空母舰是法国海军的核动力航空母舰，具备强大的战斗力和远程打击能力。",
+    "params": {
+      "standardDisplacement": "42,000 吨",
+      "fullLoadDisplacement": "48,000 吨",
+      "maxSpeed": "50 公里/小时",
+      "range": "无限 (核动力)",
+      "armament": "阿斯特 15 导弹, 100 架飞机"
+    },
+    "equipment": [
+      {
+        "name": "阿斯特 15 导弹",
+        "type": "missile"
+      },
+      {
+        "name": "阵风 M 飞机",
+        "type": "aircraft"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "辽宁号航空母舰",
+    "type": "航空母舰",
+    "description": "辽宁号航空母舰是中国人民解放军海军的航空母舰，具备强大的作战能力。",
+    "params": {
+      "standardDisplacement": "55,000 吨",
+      "fullLoadDisplacement": "60,000 吨",
+      "maxSpeed": "55 公里/小时",
+      "range": "14,000 公里",
+      "armament": "舰空导弹, 40 架飞机"
+    },
+    "equipment": [
+      {
+        "name": "舰空导弹",
+        "type": "missile"
+      },
+      {
+        "name": "沈阳 J-15",
+        "type": "aircraft"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "type": "驱逐舰",
+    "name": "朱姆沃尔特号驱逐舰",
+    "description": "朱姆沃尔特号驱逐舰是美国海军的隐形驱逐舰，具备强大的作战能力和先进的隐身设计。",
+    "params": {
+      "standardDisplacement": "15,000 吨",
+      "fullLoadDisplacement": "16,000 吨",
+      "maxSpeed": "55 公里/小时",
+      "range": "9,000 公里",
+      "armament": "AGM-114L 长弓地狱火导弹, 战斧导弹"
+    },
+    "equipment": [
+      {
+        "name": "AGM-114L 长弓地狱火导弹",
+        "type": "missile"
+      },
+      {
+        "name": "战斧导弹",
+        "type": "missile"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "type": "航空母舰",
+    "name": "维克兰特号航空母舰",
+    "description": "维克兰特号航空母舰是印度海军的新一代航空母舰，具备强大的作战能力。",
+    "params": {
+      "standardDisplacement": "40,000 吨",
+      "fullLoadDisplacement": "45,000 吨",
+      "maxSpeed": "56 公里/小时",
+      "range": "15,000 公里",
+      "armament": "巴拉克 1 导弹, RBU-6000, 米格-29K 飞机"
+    },
+    "equipment": [
+      {
+        "name": "巴拉克 1 导弹",
+        "type": "missile"
+      },
+      {
+        "name": "RBU-6000",
+        "type": "anti-submarine system"
+      },
+      {
+        "name": "米格-29K 飞机",
+        "type": "aircraft"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "威尔士亲王号航空母舰",
+    "type": "航空母舰",
+    "description": "威尔士亲王号航空母舰是英国皇家海军的主力航空母舰，具备现代化的设计和强大的战斗力。",
+    "params": {
+      "standardDisplacement": "65,000 吨",
+      "fullLoadDisplacement": "72,000 吨",
+      "maxSpeed": "48 公里/小时",
+      "range": "19,000 公里",
+      "armament": "方阵近防系统, F-35B 闪电 II, 梅林直升机"
+    },
+    "equipment": [
+      {
+        "name": "方阵近防系统",
+        "type": "defense system"
+      },
+      {
+        "name": "F-35B 闪电 II",
+        "type": "aircraft"
+      },
+      {
+        "name": "梅林直升机",
+        "type": "helicopter"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "阿利伯克级驱逐舰",
+    "type": "驱逐舰",
+    "description": "阿利伯克级驱逐舰是美国海军的多功能驱逐舰，具备强大的防空、反潜和反舰能力。",
+    "params": {
+      "standardDisplacement": "8,315 吨",
+      "fullLoadDisplacement": "9,200 吨",
+      "maxSpeed": "56 公里/小时",
+      "range": "8,000 公里",
+      "armament": "SM-2防空导弹, 战斧巡航导弹, 鱼叉反舰导弹, MK 41垂直发射系统"
+    },
+    "equipment": [
+      {
+        "name": "SM-2防空导弹",
+        "type": "missile"
+      },
+      {
+        "name": "战斧巡航导弹",
+        "type": "missile"
+      },
+      {
+        "name": "鱼叉反舰导弹",
+        "type": "missile"
+      },
+      {
+        "name": "MK 41垂直发射系统",
+        "type": "launch system"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "阿基坦级护卫舰",
+    "type": "护卫舰",
+    "description": "阿基坦级护卫舰是法国海军的新一代多用途护卫舰，具备强大的反潜、反舰和防空能力。",
+    "params": {
+      "standardDisplacement": "6,000 吨",
+      "fullLoadDisplacement": "6,500 吨",
+      "maxSpeed": "50 公里/小时",
+      "range": "11,000 公里",
+      "armament": "阿斯特 15/30 防空导弹, 埃克塞特反舰导弹, MU90鱼雷"
+    },
+    "equipment": [
+      {
+        "name": "阿斯特 15/30 防空导弹",
+        "type": "missile"
+      },
+      {
+        "name": "埃克塞特反舰导弹",
+        "type": "missile"
+      },
+      {
+        "name": "MU90鱼雷",
+        "type": "torpedo"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "西北风级两栖攻击舰",
+    "type": "两栖攻击舰",
+    "description": "西北风级两栖攻击舰是法国海军的大型两栖作战舰，具备运输和部署海军陆战队和装备的能力。",
+    "params": {
+      "standardDisplacement": "21,300 吨",
+      "fullLoadDisplacement": "24,000 吨",
+      "maxSpeed": "37 公里/小时",
+      "range": "19,800 公里",
+      "armament": "西北风防空导弹, 30mm炮"
+    },
+    "equipment": [
+      {
+        "name": "西北风防空导弹",
+        "type": "missile"
+      },
+      {
+        "name": "30mm炮",
+        "type": "cannon"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "type": "核潜艇",
+    "name": "弗吉尼亚级核潜艇",
+    "description": "弗吉尼亚级核潜艇是美国海军的攻击型核潜艇，具备隐身性和多用途作战能力。",
+    "params": {
+      "standardDisplacement": "7,800 吨",
+      "fullLoadDisplacement": "8,700 吨",
+      "maxSpeed": "46 公里/小时",
+      "range": "无限 (核动力)",
+      "armament": "MK 48鱼雷, 战斧巡航导弹"
+    },
+    "equipment": [
+      {
+        "name": "MK 48鱼雷",
+        "type": "torpedo"
+      },
+      {
+        "name": "战斧巡航导弹",
+        "type": "missile"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "type": "驱逐舰",
+    "name": "朱姆沃尔特级驱逐舰",
+    "description": "朱姆沃尔特级驱逐舰是美国海军的隐形驱逐舰，具备强大的作战能力和先进的隐身设计。",
+    "params": {
+      "standardDisplacement": "14,564 吨",
+      "fullLoadDisplacement": "15,656 吨",
+      "maxSpeed": "55 公里/小时",
+      "range": "9,400 公里",
+      "armament": "AGM-114L 长弓地狱火导弹, 战斧导弹"
+    },
+    "equipment": [
+      {
+        "name": "AGM-114L 长弓地狱火导弹",
+        "type": "missile"
+      },
+      {
+        "name": "战斧导弹",
+        "type": "missile"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Type 45 驱逐舰",
+    "type": "驱逐舰",
+    "description": "Type 45 驱逐舰是英国皇家海军的现代防空驱逐舰，具备强大的防空和反潜能力。",
+    "params": {
+      "standardDisplacement": "7,350 吨",
+      "fullLoadDisplacement": "8,500 吨",
+      "maxSpeed": "56 公里/小时",
+      "range": "13,000 公里",
+      "armament": "PAAMS防空系统, Aster 15/30导弹, Harpoon反舰导弹"
+    },
+    "equipment": [
+      {
+        "name": "PAAMS防空系统",
+        "type": "defense system"
+      },
+      {
+        "name": "Aster 15/30导弹",
+        "type": "missile"
+      },
+      {
+        "name": "Harpoon反舰导弹",
+        "type": "missile"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "元级潜艇",
+    "type": "潜艇",
+    "description": "元级潜艇是中国人民解放军海军的常规动力潜艇，具备现代化的潜航和作战能力。",
+    "params": {
+      "standardDisplacement": "2,200 吨",
+      "fullLoadDisplacement": "2,800 吨",
+      "maxSpeed": "37 公里/小时",
+      "range": "8,000 公里",
+      "armament": "鱼-6鱼雷, 反舰导弹"
+    },
+    "equipment": [
+      {
+        "name": "鱼-6鱼雷",
+        "type": "torpedo"
+      },
+      {
+        "name": "反舰导弹",
+        "type": "missile"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "凯旋级核潜艇",
+    "type": "核潜艇(决策类、打击类)",
+    "description": "凯旋级核潜艇是法国海军的弹道导弹核潜艇，具备强大的战略核打击能力。",
+    "params": {
+      "standardDisplacement": "12,640 吨",
+      "fullLoadDisplacement": "14,335 吨",
+      "maxSpeed": "50 公里/小时",
+      "range": "无限 (核动力)",
+      "armament": "M51弹道导弹, Exocet SM39导弹, F17鱼雷"
+    },
+    "equipment": [
+      {
+        "name": "M51弹道导弹",
+        "type": "missile"
+      },
+      {
+        "name": "Exocet SM39导弹",
+        "type": "missile"
+      },
+      {
+        "name": "F17鱼雷",
+        "type": "torpedo"
+      }
+    ]
+  }
+]
