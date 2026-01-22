@@ -179,6 +179,48 @@
             />
         </div>
 
+        <!-- 只读模式：显示已选择的 PCCS 资源 -->
+        <div class="form-section" v-if="isReadonly && props.modelValue.PCCS资源 && props.modelValue.PCCS资源.length > 0">
+            <h4>
+                选中的 PCCS 资源
+                <el-tag type="success" effect="light" size="small" style="margin-left: 10px">
+                    共 {{ props.modelValue.PCCS资源.length }} 项
+                </el-tag>
+            </h4>
+            <div class="pccs-resources-readonly">
+                <el-card v-for="(resource, index) in props.modelValue.PCCS资源" :key="index" class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">{{ resource.name }}</span>
+                        <el-tag :type="resource.resource_type === 'platform' ? 'primary' : 'success'" size="small">
+                            {{ resource.resource_type === 'platform' ? '平台' : '装备' }}
+                        </el-tag>
+                    </div>
+                    <el-descriptions :column="2" size="small" border>
+                        <el-descriptions-item label="类别">{{ resource.category }}</el-descriptions-item>
+                        <el-descriptions-item label="效能评分">
+                            <el-tag
+                                :type="resource.match_effectiveness >= 0.8 ? 'success' : resource.match_effectiveness >= 0.6 ? 'warning' : 'info'"
+                                size="small"
+                            >
+                                {{ (resource.match_effectiveness * 100).toFixed(0) }}%
+                            </el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item label="任务类型" :span="2" v-if="resource.capability && resource.capability.mission_types">
+                            {{ resource.capability.mission_types.join(', ') }}
+                        </el-descriptions-item>
+                        <el-descriptions-item label="状态" :span="2">
+                            <el-tag
+                                :type="resource.state.operational_status === '可用' ? 'success' : resource.state.operational_status === '维护' ? 'warning' : 'danger'"
+                                size="small"
+                            >
+                                {{ resource.state.operational_status }}
+                            </el-tag>
+                        </el-descriptions-item>
+                    </el-descriptions>
+                </el-card>
+            </div>
+        </div>
+
         <!-- PCCS 智能资源推荐 -->
         <div class="form-section" v-if="!isReadonly">
             <div class="section-header-with-badge">
@@ -333,8 +375,9 @@ watch(() => props.modelValue, (newVal) => {
 // --- Watcher 3: 数据输出 (本地状态 -> Props) ---
 // ** 这个 watch 只读取数据，不修改任何 formData 的属性 **
 
-watch(formData, (newValue) => {
-    if (props.isReadonly) return;
+// 构建合同数据的函数
+const buildContractData = () => {
+    const newValue = formData;
 
     // *** 核心修复 3：在输出时动态计算 patrolArea ***
     let patrolAreaForEmit = {};
@@ -348,7 +391,7 @@ watch(formData, (newValue) => {
         };
     }
 
-    const contractPartialData = {
+    return {
         合同名称: newValue.name,
         任务描述: newValue.description,
         作战场景: newValue.scenario,
@@ -373,8 +416,20 @@ watch(formData, (newValue) => {
         巡逻区域: patrolAreaForEmit,
         scenarioId: props.scenarioId,
         side: newValue.side,
+        // PCCS 选中的资源
+        PCCS资源: selectedResources.value,
     };
-    emit('update:modelValue', contractPartialData);
+};
+
+watch(formData, () => {
+    if (props.isReadonly) return;
+    emit('update:modelValue', buildContractData());
+}, { deep: true });
+
+// 监听 selectedResources 的变化，及时更新合同数据
+watch(selectedResources, () => {
+    if (props.isReadonly) return;
+    emit('update:modelValue', buildContractData());
 }, { deep: true });
 
 const onScenarioChange = (scenario) => {
@@ -466,4 +521,35 @@ onMounted(() => {
 .section-header-with-badge { margin-bottom: 16px; }
 .section-header-with-badge h4 { display: inline-flex; align-items: center; }
 .header-subtitle { color: #6b7280; font-size: 13px; font-weight: normal; margin-left: 8px; }
+
+/* PCCS 资源只读模式展示样式 */
+.pccs-resources-readonly {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.pccs-resources-readonly .resource-card {
+    transition: all 0.3s ease;
+}
+
+.pccs-resources-readonly .resource-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pccs-resources-readonly .resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e4e7ed;
+}
+
+.pccs-resources-readonly .resource-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #2c3e50;
+}
 </style>
