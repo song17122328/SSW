@@ -7,12 +7,17 @@
         <template #content>
           <div class="header-content">
             <span class="header-title">{{ equipment.name }}</span>
+            <!-- 视图模式切换 -->
+            <el-radio-group v-model="viewMode" size="small" style="margin-left: 20px">
+              <el-radio-button label="traditional">传统视图</el-radio-button>
+              <el-radio-button label="pccs">PCCS 视图</el-radio-button>
+            </el-radio-group>
           </div>
         </template>
       </el-page-header>
 
-      <!-- 卡片网格布局 -->
-      <div class="details-grid">
+      <!-- 传统视图 -->
+      <div v-if="viewMode === 'traditional'" class="details-grid">
         <!-- 装备基本信息卡片 -->
         <el-card class="detail-card">
           <template #header>
@@ -73,8 +78,13 @@
           <el-empty v-else description="无详细参数" :image-size="60" />
         </el-card>
       </div>
+
+      <!-- PCCS 视图 -->
+      <div v-if="viewMode === 'pccs'">
+        <PCCSDisplay resource-type="equipment" :resource-id="props.id" />
+      </div>
     </div>
-    
+
     <!-- 加载失败或无数据时的提示 -->
     <el-empty v-else-if="!loading" description="未能加载装备数据" />
   </div>
@@ -85,6 +95,7 @@ import { ref, watchEffect, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '@/services/api';
 import { ElMessage } from 'element-plus';
+import PCCSDisplay from '@/components/pccs/PCCSDisplay.vue';
 
 
 const props = defineProps({
@@ -97,6 +108,7 @@ const props = defineProps({
 const router = useRouter();
 const loading = ref(true);
 const equipment = ref(null);
+const viewMode = ref('traditional'); // 视图模式: traditional / pccs
 
 
 const hasDetails = computed(() => {

@@ -200,6 +200,15 @@ const handleUpdateStatus = async (newStatus) => {
     if (index !== -1) {
       platforms.value[index].status = newStatus;
     }
+
+    // 重载 PCCS 资源池以同步最新状态
+    try {
+      await api.reloadPCCSResources();
+      console.log('PCCS 资源池已更新');
+    } catch (pccsError) {
+      console.warn('PCCS 资源池更新失败，但平台状态已更新', pccsError);
+    }
+
     ElMessage.success('状态更新成功');
     dialogVisible.value = false;
   } catch (error) {
