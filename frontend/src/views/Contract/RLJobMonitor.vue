@@ -75,14 +75,15 @@
         <div v-if="hasPCCSResources" class="pccs-section">
           <div class="pccs-header">
             <el-icon><DataBoard /></el-icon>
-            <h4>PCCS 智能资源分配</h4>
-            <el-tag type="success" effect="light" size="small">
-              {{ totalPCCSResources }} 项资源
+            <h4>合同中推荐的 PCCS 资源</h4>
+            <el-tag type="info" effect="light" size="small">
+              {{ totalPCCSResources }} 项资源 (仅供参考)
             </el-tag>
           </div>
           <div class="pccs-info-text">
             <el-icon><InfoFilled /></el-icon>
-            强化学习算法将基于以下 PCCS 资源的 <strong>Capability</strong> (能力) 和 <strong>State</strong> (状态) 维度进行智能分配
+            以下是合同创建时基于 PCCS 四维模型 (<strong>Perception</strong>-<strong>Control</strong>-<strong>Capability</strong>-<strong>State</strong>) 选择的推荐资源。
+            强化学习算法将从想定资源中进行自主分配，可参考这些推荐。
           </div>
           <div class="pccs-resources-grid">
             <div v-for="(resource, index) in allPCCSResources" :key="index" class="pccs-resource-item">
@@ -253,31 +254,31 @@
       <div v-if="hasPCCSResources" class="pccs-eval-section">
         <div class="pccs-eval-header">
           <el-icon><DataAnalysis /></el-icon>
-          <h4>PCCS 智能分配分析</h4>
+          <h4>合同 PCCS 推荐资源参考</h4>
         </div>
         <div class="pccs-eval-info">
           <div class="eval-stat">
-            <div class="stat-icon">📊</div>
+            <div class="stat-icon">📋</div>
             <div class="stat-content">
-              <div class="stat-label">PCCS 资源池</div>
-              <div class="stat-value">{{ allPCCSResources.length }} 项资源</div>
+              <div class="stat-label">合同推荐</div>
+              <div class="stat-value">{{ allPCCSResources.length }} 项 PCCS 资源</div>
             </div>
           </div>
           <div class="eval-stat">
             <div class="stat-icon">🎯</div>
             <div class="stat-content">
-              <div class="stat-label">Capability 匹配</div>
+              <div class="stat-label">Capability 维度</div>
               <div class="stat-value">
-                <el-tag type="success" size="small">基于任务能力维度</el-tag>
+                <el-tag type="info" size="small">基于任务能力匹配</el-tag>
               </div>
             </div>
           </div>
           <div class="eval-stat">
-            <div class="stat-icon">✅</div>
+            <div class="stat-icon">📊</div>
             <div class="stat-content">
-              <div class="stat-label">State 优先级</div>
+              <div class="stat-label">State 维度</div>
               <div class="stat-value">
-                <el-tag type="success" size="small">优先可用状态</el-tag>
+                <el-tag type="info" size="small">考虑资源可用状态</el-tag>
               </div>
             </div>
           </div>
@@ -285,9 +286,8 @@
         <div class="pccs-eval-description">
           <el-icon><InfoFilled /></el-icon>
           <span>
-            强化学习算法已根据 PCCS 资源的 <strong>Capability</strong> (能力) 维度自动匹配任务需求，
-            并基于 <strong>State</strong> (状态) 维度优先分配可用资源，
-            实现了 <strong>Perception</strong>-<strong>Control</strong>-<strong>Capability</strong>-<strong>State</strong> 四维度的智能决策。
+            以上展示的是合同创建时基于 <strong>PCCS 四维模型</strong> (<strong>Perception</strong>-<strong>Control</strong>-<strong>Capability</strong>-<strong>State</strong>) 选择的推荐资源。
+            <strong>下方显示的实际分配结果</strong>由强化学习算法根据想定资源和任务需求自主决策生成，可能与推荐不同。
           </span>
         </div>
       </div>
@@ -626,17 +626,17 @@ const startTrain = async () => {
 
     const message = `
       <div style="text-align: left;">
-        <p style="margin-bottom: 12px;"><strong>强化学习算法将基于以下 PCCS 资源进行智能分配：</strong></p>
+        <p style="margin-bottom: 12px;"><strong>合同中包含以下 PCCS 推荐资源：</strong></p>
         <ul style="line-height: 1.8; margin: 8px 0;">
           <li>📦 总资源数量：<strong>${allPCCSResources.value.length}</strong> 项</li>
           <li>🚢 平台资源：<strong>${platformCount}</strong> 个</li>
           <li>⚙️ 装备资源：<strong>${equipmentCount}</strong> 个</li>
           <li>✅ 可用状态：<strong>${availableCount}</strong> 项</li>
         </ul>
-        <p style="margin-top: 16px; padding: 12px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 4px; font-size: 13px; color: #065f46;">
-          <strong>💡 智能分配机制：</strong><br/>
-          算法将根据资源的 <strong>Capability</strong> (能力维度) 匹配任务需求，
-          并考虑 <strong>State</strong> (状态维度) 优先选择可用资源。
+        <p style="margin-top: 16px; padding: 12px; background: #e0f2fe; border-left: 4px solid #0ea5e9; border-radius: 4px; font-size: 13px; color: #0c4a6e;">
+          <strong>💡 说明：</strong><br/>
+          以上资源是合同创建时基于 PCCS 四维模型选择的推荐。<br/>
+          <strong>强化学习算法将从想定资源中自主进行智能分配</strong>，分配结果可能与推荐不同。
         </p>
       </div>
     `;
