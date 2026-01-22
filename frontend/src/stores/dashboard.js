@@ -23,6 +23,13 @@ export const useDashboardStore = defineStore('dashboard', () => {
     // 按平台类型（舰艇/飞机）分类统计
     const platformStats = ref({ ship: 0, aircraft: 0 })
 
+    // 按平台状态统计
+    const platformStatusStats = ref({
+        active: 0,    // 可用
+        inactive: 0,  // 停用
+        maintenance: 0 // 维护
+    })
+
     // 按合同状态统计 (我们可以获取所有合同，然后在前端分类)
     const contractStats = ref({ pending: 0, approved: 0, rejected: 0 })
 
@@ -68,6 +75,11 @@ export const useDashboardStore = defineStore('dashboard', () => {
             platformCount.value = platformResponse.total;
             platformStats.value.ship = allPlatforms.filter(p => p.category === '舰艇').length;
             platformStats.value.aircraft = allPlatforms.filter(p => p.category === '飞机').length;
+
+            // 计算平台状态统计
+            platformStatusStats.value.active = allPlatforms.filter(p => p.status === '可用').length;
+            platformStatusStats.value.inactive = allPlatforms.filter(p => p.status === '停用').length;
+            platformStatusStats.value.maintenance = allPlatforms.filter(p => p.status === '维护').length;
 
             // 2. 更新装备统计
             const allEquipment = equipmentResponse.items;
@@ -127,6 +139,7 @@ export const useDashboardStore = defineStore('dashboard', () => {
         contractCount,
         scenarioCount,
         platformStats,
+        platformStatusStats,
         contractStats,
         recentActivities,
         equipmentStatusStats,
