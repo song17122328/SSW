@@ -195,7 +195,15 @@
             <ResourceRecommendation
                 mission-type="patrol"
                 :auto-load="true"
+                :hide-task-type-selector="true"
                 @select="handleResourceSelect"
+            />
+
+            <!-- 已选资源列表 -->
+            <SelectedResourcesList
+                :resources="selectedResources"
+                @remove="removeResource"
+                @clear="clearResources"
             />
         </div>
 
@@ -207,11 +215,12 @@
 </template>
 
 <script setup>
-import { reactive, watch, defineEmits, defineProps, onMounted } from 'vue';
+import { reactive, watch, defineEmits, defineProps, onMounted, ref } from 'vue';
 import { ElMessage } from 'element-plus';
 import { get } from 'lodash-es';
 import MapSelection from './MapSelection.vue';
 import ResourceRecommendation from '@/components/pccs/ResourceRecommendation.vue';
+import SelectedResourcesList from '@/components/pccs/SelectedResourcesList.vue';
 
 // 4. 定义 props，接收来自父组件的数据
 const props = defineProps({
@@ -245,6 +254,9 @@ const createInitialData = () => ({
 
 
 const formData = reactive(createInitialData());
+
+// PCCS 资源选择跟踪
+const selectedResources = ref([]);
 
 const updateFormDataFromModel = (newVal) => {
         console.log('[XunluoContract] watch(props.modelValue) triggered. New modelValue:', JSON.parse(JSON.stringify(newVal)));
@@ -377,15 +389,37 @@ const onScenarioChange = (scenario) => {
 
 // PCCS 资源推荐选择处理
 function handleResourceSelect(resource) {
+    // 检查是否已经选择过该资源
+    const exists = selectedResources.value.some(
+        r => r.resource_type === resource.resource_type && r.resource_id === resource.resource_id
+    );
+
+    if (exists) {
+        ElMessage.warning('该资源已经被选择');
+        return;
+    }
+
+    // 添加到已选资源列表
+    selectedResources.value.push(resource);
     ElMessage.success({
         message: `已选择资源: ${resource.name}`,
         duration: 2000
     });
 
-    // 这里可以添加将选中资源应用到合同配置的逻辑
+    // 可以在这里添加将选中资源应用到合同配置的逻辑
     console.log('选中的资源 PCCS 信息:', resource);
     console.log('效能评分:', resource.match_effectiveness);
     console.log('能力信息:', resource.capability);
+}
+
+// 移除单个资源
+function removeResource(index) {
+    selectedResources.value.splice(index, 1);
+}
+
+// 清空所有已选资源
+function clearResources() {
+    selectedResources.value = [];
 }
 
 function handleNext() {

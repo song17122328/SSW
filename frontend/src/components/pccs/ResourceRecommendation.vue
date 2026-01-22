@@ -16,8 +16,8 @@
       </template>
 
       <div class="recommendation-body">
-        <!-- 任务类型选择 -->
-        <el-form :inline="true" class="filter-form">
+        <!-- 任务类型选择 - 可选显示 -->
+        <el-form :inline="true" class="filter-form" v-if="!hideTaskTypeSelector">
           <el-form-item label="任务类型">
             <el-select
               v-model="selectedMissionType"
@@ -45,6 +45,26 @@
           <el-form-item>
             <el-tag type="info" effect="plain">
               效能阈值: {{ minEffectiveness }}%
+            </el-tag>
+          </el-form-item>
+        </el-form>
+
+        <!-- 简化版过滤器 - 仅效能调整 -->
+        <el-form :inline="true" class="filter-form-simple" v-if="hideTaskTypeSelector">
+          <el-form-item label="效能阈值">
+            <el-slider
+              v-model="minEffectiveness"
+              :min="0"
+              :max="100"
+              :step="5"
+              :format-tooltip="formatTooltip"
+              @change="fetchRecommendations"
+              style="width: 300px" />
+          </el-form-item>
+
+          <el-form-item>
+            <el-tag type="info" effect="plain">
+              {{ minEffectiveness }}%
             </el-tag>
           </el-form-item>
         </el-form>
@@ -156,7 +176,7 @@
           :image-size="100" />
 
         <el-empty
-          v-if="!loading && !selectedMissionType"
+          v-if="!loading && !selectedMissionType && !hideTaskTypeSelector"
           description="请选择任务类型以获取资源推荐"
           :image-size="100" />
       </div>
@@ -191,6 +211,10 @@ const props = defineProps({
   autoLoad: {
     type: Boolean,
     default: true
+  },
+  hideTaskTypeSelector: {
+    type: Boolean,
+    default: false
   }
 })
 
