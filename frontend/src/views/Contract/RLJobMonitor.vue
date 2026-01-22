@@ -70,8 +70,54 @@
             </div>
           </div>
         </div>
+
+        <!-- PCCS 资源展示 -->
+        <div v-if="hasPCCSResources" class="pccs-section">
+          <div class="pccs-header">
+            <el-icon><DataBoard /></el-icon>
+            <h4>PCCS 智能资源分配</h4>
+            <el-tag type="success" effect="light" size="small">
+              {{ totalPCCSResources }} 项资源
+            </el-tag>
+          </div>
+          <div class="pccs-info-text">
+            <el-icon><InfoFilled /></el-icon>
+            强化学习算法将基于以下 PCCS 资源的 <strong>Capability</strong> (能力) 和 <strong>State</strong> (状态) 维度进行智能分配
+          </div>
+          <div class="pccs-resources-grid">
+            <div v-for="(resource, index) in allPCCSResources" :key="index" class="pccs-resource-item">
+              <div class="resource-badge">
+                <el-tag :type="resource.resource_type === 'platform' ? 'primary' : 'success'" size="small">
+                  {{ resource.resource_type === 'platform' ? '平台' : '装备' }}
+                </el-tag>
+              </div>
+              <div class="resource-name">{{ resource.name }}</div>
+              <div class="resource-metrics">
+                <div class="metric">
+                  <span class="metric-label">效能:</span>
+                  <el-progress
+                    :percentage="(resource.match_effectiveness * 100)"
+                    :color="getEffectivenessColor(resource.match_effectiveness)"
+                    :stroke-width="4"
+                    :show-text="false"
+                  />
+                  <span class="metric-value">{{ (resource.match_effectiveness * 100).toFixed(0) }}%</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-label">状态:</span>
+                  <el-tag
+                    :type="resource.state.operational_status === '可用' ? 'success' : 'warning'"
+                    size="small"
+                  >
+                    {{ resource.state.operational_status }}
+                  </el-tag>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="note" v-else>请从上方列表选择一个任务合同，或从“待审批”页面批量进入。</p>
+      <p class="note" v-else>请从上方列表选择一个任务合同，或从"待审批"页面批量进入。</p>
     </section>
 
     <!-- 2. 发起任务 -->
@@ -203,6 +249,49 @@
         </div>
       </div>
 
+      <!-- PCCS 资源使用分析 -->
+      <div v-if="hasPCCSResources" class="pccs-eval-section">
+        <div class="pccs-eval-header">
+          <el-icon><DataAnalysis /></el-icon>
+          <h4>PCCS 智能分配分析</h4>
+        </div>
+        <div class="pccs-eval-info">
+          <div class="eval-stat">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+              <div class="stat-label">PCCS 资源池</div>
+              <div class="stat-value">{{ allPCCSResources.length }} 项资源</div>
+            </div>
+          </div>
+          <div class="eval-stat">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-content">
+              <div class="stat-label">Capability 匹配</div>
+              <div class="stat-value">
+                <el-tag type="success" size="small">基于任务能力维度</el-tag>
+              </div>
+            </div>
+          </div>
+          <div class="eval-stat">
+            <div class="stat-icon">✅</div>
+            <div class="stat-content">
+              <div class="stat-label">State 优先级</div>
+              <div class="stat-value">
+                <el-tag type="success" size="small">优先可用状态</el-tag>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pccs-eval-description">
+          <el-icon><InfoFilled /></el-icon>
+          <span>
+            强化学习算法已根据 PCCS 资源的 <strong>Capability</strong> (能力) 维度自动匹配任务需求，
+            并基于 <strong>State</strong> (状态) 维度优先分配可用资源，
+            实现了 <strong>Perception</strong>-<strong>Control</strong>-<strong>Capability</strong>-<strong>State</strong> 四维度的智能决策。
+          </span>
+        </div>
+      </div>
+
       <details class="details agg">
         <summary>按任务聚合的分配</summary>
 
@@ -269,9 +358,9 @@
 <script setup>
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute } from 'vue-router';
-import { ElMessage, ElSkeleton, ElDescriptions, ElDescriptionsItem, ElTag, ElIcon, ElSelect, ElOption, ElButton, ElForm, ElFormItem, ElInput, ElRow, ElCol, ElSwitch } from 'element-plus';
+import { ElMessage, ElMessageBox, ElSkeleton, ElDescriptions, ElDescriptionsItem, ElTag, ElIcon, ElSelect, ElOption, ElButton, ElForm, ElFormItem, ElInput, ElRow, ElCol, ElSwitch, ElProgress } from 'element-plus';
 import { io } from 'socket.io-client';
-import { Compass } from '@element-plus/icons-vue';
+import { Compass, DataBoard, InfoFilled, DataAnalysis } from '@element-plus/icons-vue';
 import api from '@/services/api';
 
 // --- State ---
@@ -332,6 +421,21 @@ const aggPerTask = computed(() => {
   });
   return groups;
 });
+
+// PCCS 资源相关 computed
+const allPCCSResources = computed(() => {
+  const resources = [];
+  loadedContracts.value.forEach(contract => {
+    if (contract.details && contract.details.PCCS资源 && Array.isArray(contract.details.PCCS资源)) {
+      resources.push(...contract.details.PCCS资源);
+    }
+  });
+  return resources;
+});
+
+const hasPCCSResources = computed(() => allPCCSResources.value.length > 0);
+
+const totalPCCSResources = computed(() => allPCCSResources.value.length);
 
 // --- Helpers ---
 const pushLog = (s) => console.log(`[RL LOG | ${new Date().toLocaleTimeString()}] ${s}`);
@@ -511,8 +615,44 @@ const createJobPayload = (jobType, extraParams = {}) => {
   };
 };
 
-const startTrain = () => {
+const startTrain = async () => {
   if (!connected.value || loadedContracts.value.length === 0) return;
+
+  // 如果有PCCS资源，显示确认对话框
+  if (hasPCCSResources.value) {
+    const platformCount = allPCCSResources.value.filter(r => r.resource_type === 'platform').length;
+    const equipmentCount = allPCCSResources.value.filter(r => r.resource_type === 'equipment').length;
+    const availableCount = allPCCSResources.value.filter(r => r.state.operational_status === '可用').length;
+
+    const message = `
+      <div style="text-align: left;">
+        <p style="margin-bottom: 12px;"><strong>强化学习算法将基于以下 PCCS 资源进行智能分配：</strong></p>
+        <ul style="line-height: 1.8; margin: 8px 0;">
+          <li>📦 总资源数量：<strong>${allPCCSResources.value.length}</strong> 项</li>
+          <li>🚢 平台资源：<strong>${platformCount}</strong> 个</li>
+          <li>⚙️ 装备资源：<strong>${equipmentCount}</strong> 个</li>
+          <li>✅ 可用状态：<strong>${availableCount}</strong> 项</li>
+        </ul>
+        <p style="margin-top: 16px; padding: 12px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 4px; font-size: 13px; color: #065f46;">
+          <strong>💡 智能分配机制：</strong><br/>
+          算法将根据资源的 <strong>Capability</strong> (能力维度) 匹配任务需求，
+          并考虑 <strong>State</strong> (状态维度) 优先选择可用资源。
+        </p>
+      </div>
+    `;
+
+    try {
+      await ElMessageBox.confirm(message, '确认训练任务', {
+        confirmButtonText: '开始训练',
+        cancelButtonText: '取消',
+        type: 'info',
+        dangerouslyUseHTMLString: true,
+        center: false,
+      });
+    } catch {
+      return; // 用户取消了
+    }
+  }
 
   // ✅ 先加入训练房间
   joinJobRoom(form.jobId);
@@ -620,6 +760,13 @@ const contractTypeMap = { defense: '反导', patrol: '巡逻', strike: '打击',
 const contractTypeColorMap = { defense: '#4caf50', patrol: '#2ecc71', strike: '#3498db', reconnaissance: '#f1c40f' };
 const formatContractType = (type) => contractTypeMap[type] || type || '未知';
 const getContractTypeColor = (type) => contractTypeColorMap[type] || '#909399';
+
+// PCCS 效能颜色
+const getEffectivenessColor = (effectiveness) => {
+  if (effectiveness >= 0.8) return '#67c23a'; // 绿色
+  if (effectiveness >= 0.6) return '#e6a23c'; // 橙色
+  return '#909399'; // 灰色
+};
 
 // --- Lifecycle ---
 onMounted(async () => {
@@ -780,4 +927,211 @@ tbody tr:hover { background:#f8fafc; }
 .dot-act  { background:#fb7185; }
 .dot-other{ background:#34d399; }
 .cap-small{ font-style: normal; font-size: 12px; color: #64748b; margin-left: 4px; }
+
+/* PCCS 资源展示样式 */
+.pccs-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px dashed #e5e7eb;
+}
+
+.pccs-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pccs-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.pccs-info-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-left: 4px solid #10b981;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #065f46;
+  margin-bottom: 16px;
+}
+
+.pccs-info-text strong {
+  color: #047857;
+  font-weight: 700;
+}
+
+.pccs-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.pccs-resource-item {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pccs-resource-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pccs-resource-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: #3b82f6;
+}
+
+.pccs-resource-item:hover::before {
+  opacity: 1;
+}
+
+.resource-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.resource-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-strong);
+  margin-bottom: 12px;
+  padding-right: 60px;
+}
+
+.resource-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+  min-width: 40px;
+}
+
+.metric-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-strong);
+  margin-left: 8px;
+}
+
+.metric :deep(.el-progress) {
+  flex: 1;
+}
+
+/* PCCS 评估结果展示样式 */
+.pccs-eval-section {
+  margin: 24px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px solid #0ea5e9;
+  border-radius: 12px;
+}
+
+.pccs-eval-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.pccs-eval-header h4 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0c4a6e;
+}
+
+.pccs-eval-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.eval-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s;
+}
+
+.eval-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.pccs-eval-description {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  background: white;
+  border-left: 4px solid #0ea5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.pccs-eval-description strong {
+  color: #0c4a6e;
+  font-weight: 700;
+}
 </style>
