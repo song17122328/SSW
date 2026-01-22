@@ -171,8 +171,22 @@
         <h2>查看历史</h2>
       </div>
       <div class="row">
-        <input v-model.trim="queryId" class="input" placeholder="输入 Job ID 查看历史训练与评估结果">
-        <button class="btn ghost" @click="viewHistory">查看</button>
+        <el-select
+          v-model="queryId"
+          placeholder="选择 Job ID 查看历史训练与评估结果"
+          class="grow"
+          filterable
+          clearable
+          size="large"
+        >
+          <el-option
+            v-for="jid in availableJobIds"
+            :key="jid"
+            :label="jid"
+            :value="jid"
+          />
+        </el-select>
+        <el-button class="ml" @click="viewHistory" size="large">查看</el-button>
         <span class="muted" v-if="queryNotFound">无</span>
       </div>
       <p class="note">说明：优先从本页已缓存的数据中查找；若没有则请求后端
@@ -437,6 +451,27 @@ const hasPCCSResources = computed(() => allPCCSResources.value.length > 0);
 
 const totalPCCSResources = computed(() => allPCCSResources.value.length);
 
+// 可查看历史的 Job IDs
+const availableJobIds = computed(() => {
+  const jobIds = new Set();
+
+  // 从训练记录中获取
+  Object.keys(episodes).forEach(jid => {
+    if (Array.isArray(episodes[jid]) && episodes[jid].length > 0) {
+      jobIds.add(jid);
+    }
+  });
+
+  // 从评估记录中获取
+  Object.keys(evalMap).forEach(jid => {
+    if (evalMap[jid]) {
+      jobIds.add(jid);
+    }
+  });
+
+  return Array.from(jobIds).sort();
+});
+
 // --- Helpers ---
 const pushLog = (s) => console.log(`[RL LOG | ${new Date().toLocaleTimeString()}] ${s}`);
 
@@ -622,7 +657,7 @@ const startTrain = async () => {
   if (hasPCCSResources.value) {
     const platformCount = allPCCSResources.value.filter(r => r.resource_type === 'platform').length;
     const equipmentCount = allPCCSResources.value.filter(r => r.resource_type === 'equipment').length;
-    const availableCount = allPCCSResources.value.filter(r => r.state.operational_status === '可用').length;
+    const availableCount = allPCCSResources.value.filter(r => r.state.operational_status === 'online').length;
 
     const message = `
       <div style="text-align: left;">
