@@ -36,6 +36,16 @@ export const useDashboardStore = defineStore('dashboard', () => {
     })
     // ==========================================================
 
+    // ==========================================================
+    // *** 新增：为装备类型统计添加 State ***
+    // ==========================================================
+    const equipmentTypeStats = ref({
+        sense: 0,    // 感知类 (S)
+        control: 0,  // 控制类 (C)
+        action: 0    // 执行类 (A)
+    })
+    // ==========================================================
+
     // --- Actions ---
     async function fetchDashboardData() {
         loading.value = true
@@ -70,6 +80,14 @@ export const useDashboardStore = defineStore('dashboard', () => {
             equipmentStatusStats.value.active = allEquipment.filter(e => e.status === '可用').length;
             equipmentStatusStats.value.inactive = allEquipment.filter(e => e.status === '停用').length;
             equipmentStatusStats.value.maintenance = allEquipment.filter(e => e.status === '维护').length;
+            // ==========================================================
+
+            // ==========================================================
+            // *** 新增：计算装备类型统计（基于 type_code）***
+            // ==========================================================
+            equipmentTypeStats.value.sense = allEquipment.filter(e => e.type_code === 'S').length;
+            equipmentTypeStats.value.control = allEquipment.filter(e => e.type_code === 'C').length;
+            equipmentTypeStats.value.action = allEquipment.filter(e => e.type_code === 'A').length;
             // ==========================================================
 
             // 3. 更新合同统计
@@ -112,6 +130,7 @@ export const useDashboardStore = defineStore('dashboard', () => {
         contractStats,
         recentActivities,
         equipmentStatusStats,
+        equipmentTypeStats,
         fetchDashboardData,
         addActivity
     }

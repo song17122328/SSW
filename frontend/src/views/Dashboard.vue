@@ -37,14 +37,28 @@
           <template #header><div class="card-header">合同状态</div></template>
           <div class="chart-container" v-loading="dashboardStore.loading">
             <!-- *** 核心修复 2：增加 v-else 的空状态显示 *** -->
-            <bar-chart 
-              v-if="!dashboardStore.loading && dashboardStore.contractCount > 0" 
+            <bar-chart
+              v-if="!dashboardStore.loading && dashboardStore.contractCount > 0"
               :data="contractChartData"
             />
             <el-empty v-else description="合同数量为 0" :image-size="80" />
           </div>
         </el-card>
 
+        <!-- ========================================================== -->
+        <!-- *** 新增：装备类型分类卡片 *** -->
+        <!-- ========================================================== -->
+        <el-card class="dashboard-card" shadow="hover">
+          <template #header><div class="card-header">装备分类</div></template>
+          <div class="chart-container" v-loading="dashboardStore.loading">
+            <pie-chart
+              v-if="!dashboardStore.loading && dashboardStore.equipmentCount > 0"
+              :data="equipmentTypeChartData"
+            />
+            <el-empty v-else description="暂无装备数据" :image-size="80" />
+          </div>
+        </el-card>
+        <!-- ========================================================== -->
 
         <!-- ========================================================== -->
         <!-- *** 新增：恢复装备状态分布卡片 *** -->
@@ -58,11 +72,12 @@
           </template>
             <!-- 装备状态分布饼图 -->
             <div class="chart-container" v-loading="dashboardStore.loading">
-              <pie-chart 
-                v-if="!dashboardStore.loading && dashboardStore.equipmentCount > 0" 
+              <pie-chart
+                v-if="!dashboardStore.loading && dashboardStore.equipmentCount > 0"
                 :data="equipmentStatusChartData"
               />
-            </div> 
+              <el-empty v-else description="暂无装备数据" :image-size="80" />
+            </div>
 
         </el-card>
         <!-- ========================================================== -->
@@ -222,6 +237,16 @@ const equipmentStatusChartData = computed(() => [
   { value: dashboardStore.equipmentStatusStats.active, name: '可用', itemStyle: { color: '#27ae60' } },
   { value: dashboardStore.equipmentStatusStats.maintenance, name: '维护中', itemStyle: { color: '#f39c12' } },
   { value: dashboardStore.equipmentStatusStats.inactive, name: '已停用', itemStyle: { color: '#95a5a6' } },
+]);
+// ==========================================================
+
+// ==========================================================
+// *** 新增：为装备类型饼图准备数据 ***
+// ==========================================================
+const equipmentTypeChartData = computed(() => [
+  { value: dashboardStore.equipmentTypeStats.sense, name: '感知类 (S)', itemStyle: { color: '#3498db' } },
+  { value: dashboardStore.equipmentTypeStats.control, name: '控制类 (C)', itemStyle: { color: '#9b59b6' } },
+  { value: dashboardStore.equipmentTypeStats.action, name: '执行类 (A)', itemStyle: { color: '#e74c3c' } },
 ]);
 // ==========================================================
 
