@@ -171,7 +171,7 @@ def init_db():
 
     print("  步骤 1️⃣  填充平台和装备基础数据")
     print("  ─────────────────────────────────────────────────────")
-    print("    python3 1_populate_from_mapping.py")
+    print("    python 1_populate_from_mapping.py")
     print("")
     print("    ✓ 填充 20 个平台（航母、驱逐舰、护卫舰、潜艇、飞机等）")
     print("    ✓ 填充 63 个装备（雷达、导弹、电子战系统等）")
@@ -180,7 +180,7 @@ def init_db():
 
     print("  步骤 2️⃣  填充合同模板和作战想定")
     print("  ─────────────────────────────────────────────────────")
-    print("    python3 2_populate_extra_data.py")
+    print("    python 2_populate_extra_data.py")
     print("")
     print("    ✓ 填充 8 个合同模板（打击、巡逻、侦察、防御等）")
     print("    ✓ 填充 2 个作战想定（对海、对空场景）")
@@ -188,7 +188,7 @@ def init_db():
 
     print("  步骤 3️⃣  填充装备详细参数 (Details)")
     print("  ─────────────────────────────────────────────────────")
-    print("    python3 3_populate_equipment_details.py")
+    print("    python 3_populate_equipment_details.py")
     print("")
     print("    ✓ 为 63 个装备生成详细技术参数")
     print("    ✓ 感知类(S): 探测距离、频率范围、目标容量等")
@@ -198,7 +198,7 @@ def init_db():
 
     print("  步骤 4️⃣  初始化 PCCS 资源池")
     print("  ─────────────────────────────────────────────────────")
-    print("    python3 init_pccs_pool.py")
+    print("    python init_pccs_pool.py")
     print("")
     print("    ✓ 从数据库加载平台和装备")
     print("    ✓ 转换为 PCCS 四维度资源（Perception/Control/Capability/State）")
