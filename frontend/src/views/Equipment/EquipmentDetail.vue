@@ -58,19 +58,35 @@
           </el-table>
         </el-card>
 
-<!-- *** 核心修复 1：使用 v-for 遍历 details 对象来生成表格 *** -->
+<!-- *** 核心修复 1：使用 v-for 遍历 details 对象来生成表格，支持两层嵌套 *** -->
         <el-card class="info-card">
           <template #header><div class="card-header">详细参数 (Details)</div></template>
           <div v-if="hasDetails">
             <el-descriptions :column="1" border>
-              <el-descriptions-item 
-                v-for="(value, key) in equipment.details" 
-                :key="key" 
+              <el-descriptions-item
+                v-for="(value, key) in equipment.details"
+                :key="key"
                 :label="key"
               >
-                <!-- 如果值是对象或数组，美化显示 -->
-                <pre v-if="isObject(value)" class="json-code-block">{{ formatJson(value) }}</pre>
-                <!-- 否则直接显示 -->
+                <!-- 第一级：如果值是对象，渲染为嵌套的描述列表 -->
+                <div v-if="isObject(value) && !Array.isArray(value)">
+                  <el-descriptions :column="1" border size="small" class="nested-descriptions">
+                    <el-descriptions-item
+                      v-for="(nestedValue, nestedKey) in value"
+                      :key="nestedKey"
+                      :label="nestedKey"
+                      label-class-name="nested-label"
+                    >
+                      <!-- 第二级：如果仍然是对象，则使用 JSON 格式显示 -->
+                      <pre v-if="isObject(nestedValue)" class="json-code-block">{{ formatJson(nestedValue) }}</pre>
+                      <!-- 否则直接显示 -->
+                      <span v-else>{{ nestedValue }}</span>
+                    </el-descriptions-item>
+                  </el-descriptions>
+                </div>
+                <!-- 第一级：如果值是数组，使用 JSON 格式显示 -->
+                <pre v-else-if="Array.isArray(value)" class="json-code-block">{{ formatJson(value) }}</pre>
+                <!-- 第一级：如果是普通值，直接显示 -->
                 <span v-else>{{ value }}</span>
               </el-descriptions-item>
             </el-descriptions>
@@ -163,7 +179,34 @@ watchEffect(() => {
 .card-header span { font-weight: bold; color: #303133; }
 .item-link { color: #409eff; text-decoration: none; font-weight: 500; }
 .item-link:hover { text-decoration: underline; color: #79bbff; }
+
 :deep(.my-label) {
   width: 120px;
+}
+
+/* 嵌套描述列表样式 */
+.nested-descriptions {
+  margin: 0;
+  background-color: #fafafa;
+}
+
+:deep(.nested-label) {
+  width: 150px;
+  background-color: #f5f7fa !important;
+  font-size: 13px;
+  color: #606266;
+}
+
+/* JSON 代码块样式 */
+.json-code-block {
+  margin: 0;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+  overflow-x: auto;
 }
 </style>
