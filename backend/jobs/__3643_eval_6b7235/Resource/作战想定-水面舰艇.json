@@ -1,0 +1,471 @@
+[
+  {
+    "name": "无人母舰-2",
+    "type": "登陆舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "4x 16PC2-6B柴油机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "H/LJQ-382型三坐标对空搜索雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "中近程快反相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "075型两栖攻击舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      }
+    ]
+  },
+  {
+    "name": "辽宁号-2",
+    "type": "航母",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "001号航空母舰推进系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "346型“海之星”有源相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "MR-320M“双支柱”对海雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "MR-210型“棕榈树”导航雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "MGK-345 Bronza/On Yoke舰体声纳#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "国产726-4A型干扰弹发射装置#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "辽宁号#(1.0.1)",
+        "type": "sensor"
+      }
+    ]
+  },
+  {
+    "name": "XXD驱逐舰-4",
+    "type": "驱逐舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "7424型324毫米鱼雷发射装置#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "364型搜索雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "346A型有源相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "通用拖曳式阵列声纳#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "052D驱逐舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "GT-25000燃气轮机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "64单元通用垂直发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "鹰击18导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-9B中远程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      }
+    ]
+  },
+  {
+    "name": "XXD驱逐舰-2",
+    "type": "驱逐舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "64单元通用垂直发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "通用拖曳式阵列声纳#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "052D驱逐舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "7424型324毫米鱼雷发射装置#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "364型搜索雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "GT-25000燃气轮机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "346A型有源相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-9B中远程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "鹰击18导弹",
+        "type": "weapon missile"
+      }
+    ]
+  },
+  {
+    "name": "XXD驱逐舰-1",
+    "type": "驱逐舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "GT-25000燃气轮机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "7424型324毫米鱼雷发射装置#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "64单元通用垂直发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "364型搜索雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "346A型有源相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "通用拖曳式阵列声纳#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "052D驱逐舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-9B中远程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "鹰击18导弹",
+        "type": "weapon missile"
+      }
+    ]
+  },
+  {
+    "name": "XXD驱逐舰-3",
+    "type": "驱逐舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "364型搜索雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "7424型324毫米鱼雷发射装置#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "GT-25000燃气轮机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "052D驱逐舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "通用拖曳式阵列声纳#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "64单元通用垂直发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "346A型有源相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "鹰击18导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-9B中远程防空导弹",
+        "type": "weapon missile"
+      }
+    ]
+  },
+  {
+    "name": "无人母舰-1",
+    "type": "登陆舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "H/LJQ-382型三坐标对空搜索雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "中近程快反相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "4x 16PC2-6B柴油机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "075型两栖攻击舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      }
+    ]
+  },
+  {
+    "name": "XX5驱逐舰-1",
+    "type": "驱逐舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "346B型有源相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "通用拖曳式阵列声纳#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "通用电子对抗系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "4x CGT-25M燃气轮机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "国产舰载垂直发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "055驱逐舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "鱼-7鱼雷发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "国产760型雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-9B中远程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "鹰击18导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      }
+    ]
+  },
+  {
+    "name": "XX5驱逐舰-2",
+    "type": "驱逐舰",
+    "params": {
+      "maxSpeed": 30
+    },
+    "equipment": [
+      {
+        "name": "055驱逐舰#(1.0.1)",
+        "type": "sensor"
+      },
+      {
+        "name": "鱼-7鱼雷发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "通用拖曳式阵列声纳#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-10舰载防空导弹发射系统#1(1.0.0)",
+        "type": "sensor missile"
+      },
+      {
+        "name": "通用电子对抗系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "346B型有源相控阵雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "4x CGT-25M燃气轮机#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "指挥设备#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "国产舰载垂直发射系统#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "国产760型雷达#1(1.0.0)",
+        "type": "sensor"
+      },
+      {
+        "name": "红旗-9B中远程防空导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "鹰击18导弹",
+        "type": "weapon missile"
+      },
+      {
+        "name": "红旗-10A近程防空导弹",
+        "type": "weapon missile"
+      }
+    ]
+  }
+]

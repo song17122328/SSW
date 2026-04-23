@@ -1,0 +1,410 @@
+{
+  "合同名称": "模拟作战任务",
+  "作战场景": "对空反导",
+  "感知Sense作战装备要求": {
+    "类型要求": [
+      "飞行器",
+      "舰艇",
+      "航母"
+    ],
+    "能力要求": {
+      "感知范围": "50 km",
+      "精度": "100 m",
+      "速度": "120 m/s",
+      "通信链路带宽需求": "2 MB/s",
+      "出航航线": "默认",
+      "返航航线": "默认"
+    }
+  },
+  "控制Command作战装备要求": {
+    "类型要求": [
+      "飞行器",
+      "舰艇",
+      "航母"
+    ],
+    "能力要求": {
+      "与Act作战装备距离要求": "200 km",
+      "计算能力": "1.6 GHz",
+      "控制范围": "300 km",
+      "指挥精度": "100 m",
+      "出航航线": "默认",
+      "返航航线": "默认"
+    }
+  },
+  "执行Act作战装备要求": {
+    "类型要求": [
+      "飞行器",
+      "舰艇",
+      "航母"
+    ],
+    "能力要求": {
+      "弹药最低数量": "1 枚",
+      "同时发送的弹药数量": "1 枚",
+      "弹药类型": "所有防空导弹",
+      "弹药攻击方式": "默认",
+      "最小打击半径": "2 km",
+      "最大打击半径": "6 km",
+      "速度": "120 m/s",
+      "出航航线": "默认",
+      "返航航线": "默认",
+      "武器航线": "默认"
+    }
+  },
+  "杀伤网要求": {
+    "冗余性指标": [
+      "低"
+    ],
+    "风险性指标": [
+      "中"
+    ],
+    "敏捷性指标": [
+      "高"
+    ]
+  },
+  "敌方目标": [
+    {
+      "name": "F/A-18F型“超级大黄蜂”战斗机-1",
+      "position": [
+        "129.568776",
+        "21.923786"
+      ],
+      "id": 75
+    },
+    {
+      "name": "E-2D预警机-1",
+      "position": [
+        "129.541934",
+        "22.404423"
+      ],
+      "id": 89
+    },
+    {
+      "name": "F/A-18E型“超级大黄蜂”战斗机-1",
+      "position": [
+        "129.468166",
+        "21.966711"
+      ],
+      "id": 67
+    }
+  ],
+  "期望毁伤率": [
+    "仅攻击一次"
+  ],
+  "PCCS资源": [
+    {
+      "capability": {
+        "anti_jamming_level": 7,
+        "bandwidth": 100,
+        "computing_power": 0,
+        "cruise_speed": 22.0906,
+        "detection_capability": {
+          "radar": {
+            "range": 400
+          },
+          "sonar": {}
+        },
+        "effectiveness_scores": {
+          "air_defense": 0.7,
+          "patrol": 0.6,
+          "recon": 0.7
+        },
+        "encryption_support": true,
+        "endurance": 2025,
+        "firepower": 60,
+        "maneuverability": "medium",
+        "max_speed": 31.558,
+        "mission_types": [
+          "patrol",
+          "air_defense",
+          "recon"
+        ],
+        "sensor_type": [
+          "radar"
+        ],
+        "storage_capacity": 0,
+        "strike_range": 50,
+        "strike_types": [],
+        "weapon_systems": [
+          {
+            "firepower": 60,
+            "name": "Mk 91 NSSM 引导系统",
+            "range": 50,
+            "type": "missile"
+          }
+        ]
+      },
+      "category": "舰艇",
+      "control": {
+        "api_endpoint": "/api/pccs/control/1",
+        "available_commands": [
+          "navigate",
+          "detect",
+          "communicate",
+          "fire",
+          "defend"
+        ],
+        "command_latency": 0.5,
+        "control_authority": "manual",
+        "control_protocol": "REST",
+        "controller_id": null,
+        "message_format": "json",
+        "priority_level": 5,
+        "response_timeout": 30
+      },
+      "last_modified_time": "2026-04-02T09:15:02.896252",
+      "match_effectiveness": 0.7,
+      "name": "尼米兹号航空母舰",
+      "perception": {
+        "communication_range": 200,
+        "datalink_status": "online",
+        "datalink_type": [
+          "HF"
+        ],
+        "detection_range": 100,
+        "detection_types": [
+          "air",
+          "surface"
+        ],
+        "heading": 0,
+        "position": {
+          "altitude": 0,
+          "latitude": 0,
+          "longitude": 0
+        },
+        "speed": 0,
+        "tracking_capacity": 140,
+        "update_frequency": 1
+      },
+      "registration_time": "2026-04-02T09:15:02.896252",
+      "resource_id": 1,
+      "resource_type": "platform",
+      "state": {
+        "ammunition_level": 1,
+        "availability_status": "available",
+        "battery_level": 1,
+        "connection_strength": 0.95,
+        "fuel_consumption_rate": 100,
+        "fuel_level": 1,
+        "health_level": 1,
+        "last_update_time": "2026-04-02T09:15:02.896252",
+        "mission_status": "idle",
+        "network_latency": 10,
+        "next_maintenance_time": null,
+        "operational_status": "online",
+        "packet_loss_rate": 0.01,
+        "power_consumption": 5000,
+        "uptime": 0
+      },
+      "tags": [
+        "美国",
+        "航空母舰"
+      ]
+    },
+    {
+      "capability": {
+        "anti_jamming_level": 0,
+        "bandwidth": 0,
+        "computing_power": 0,
+        "cruise_speed": 0,
+        "detection_capability": {},
+        "effectiveness_scores": {
+          "air_defense": 0.7,
+          "strike": 0.7
+        },
+        "encryption_support": true,
+        "endurance": 0,
+        "firepower": 80,
+        "maneuverability": "medium",
+        "max_speed": 0,
+        "mission_types": [
+          "strike",
+          "air_defense"
+        ],
+        "sensor_type": [],
+        "storage_capacity": 0,
+        "strike_range": 200,
+        "strike_types": [],
+        "weapon_systems": []
+      },
+      "category": "导弹火控系统",
+      "control": {
+        "api_endpoint": "/api/pccs/control/equipment/34",
+        "available_commands": [
+          "power_on",
+          "power_off",
+          "operate"
+        ],
+        "command_latency": 0,
+        "control_authority": "manual",
+        "control_protocol": "REST",
+        "controller_id": null,
+        "message_format": "json",
+        "priority_level": 5,
+        "response_timeout": 30
+      },
+      "last_modified_time": "2026-04-02T09:15:02.904635",
+      "match_effectiveness": 0.7,
+      "name": "Mk 91 NSSM 引导系统",
+      "perception": {
+        "communication_range": 0,
+        "datalink_status": "online",
+        "datalink_type": [],
+        "detection_range": 0,
+        "detection_types": [],
+        "heading": 0,
+        "position": {
+          "altitude": 0,
+          "latitude": 0,
+          "longitude": 0
+        },
+        "speed": 0,
+        "tracking_capacity": 0,
+        "update_frequency": 1
+      },
+      "registration_time": "2026-04-02T09:15:02.904635",
+      "resource_id": 34,
+      "resource_type": "equipment",
+      "state": {
+        "ammunition_level": 1,
+        "availability_status": "available",
+        "battery_level": 1,
+        "connection_strength": 1,
+        "fuel_consumption_rate": 0,
+        "fuel_level": 1,
+        "health_level": 1,
+        "last_update_time": "2026-04-02T09:15:02.904635",
+        "mission_status": "idle",
+        "network_latency": 0,
+        "next_maintenance_time": null,
+        "operational_status": "online",
+        "packet_loss_rate": 0,
+        "power_consumption": 0,
+        "uptime": 0
+      },
+      "tags": [
+        "A"
+      ]
+    },
+    {
+      "capability": {
+        "anti_jamming_level": 7,
+        "bandwidth": 100,
+        "computing_power": 0,
+        "cruise_speed": 192521.69999999998,
+        "detection_capability": {
+          "radar": {
+            "range": 400
+          },
+          "sonar": {}
+        },
+        "effectiveness_scores": {
+          "air_defense": 0.7,
+          "patrol": 0.6,
+          "recon": 0.7,
+          "strike": 0.7
+        },
+        "encryption_support": true,
+        "endurance": 6000110006900152000,
+        "firepower": 60,
+        "maneuverability": "medium",
+        "max_speed": 275031,
+        "mission_types": [
+          "patrol",
+          "air_defense",
+          "strike",
+          "recon"
+        ],
+        "sensor_type": [
+          "radar"
+        ],
+        "storage_capacity": 0,
+        "strike_range": 50,
+        "strike_types": [
+          "anti-air"
+        ],
+        "weapon_systems": [
+          {
+            "firepower": 60,
+            "name": "PAAMS (主防空导弹系统)",
+            "range": 50,
+            "type": "missile"
+          }
+        ]
+      },
+      "category": "舰艇",
+      "control": {
+        "api_endpoint": "/api/pccs/control/5",
+        "available_commands": [
+          "navigate",
+          "detect",
+          "communicate",
+          "fire",
+          "defend"
+        ],
+        "command_latency": 0.5,
+        "control_authority": "manual",
+        "control_protocol": "REST",
+        "controller_id": null,
+        "message_format": "json",
+        "priority_level": 5,
+        "response_timeout": 30
+      },
+      "last_modified_time": "2026-04-02T09:15:02.896252",
+      "match_effectiveness": 0.7,
+      "name": "阿基坦级巡防舰",
+      "perception": {
+        "communication_range": 200,
+        "datalink_status": "online",
+        "datalink_type": [
+          "HF"
+        ],
+        "detection_range": 100,
+        "detection_types": [
+          "air",
+          "surface"
+        ],
+        "heading": 0,
+        "position": {
+          "altitude": 0,
+          "latitude": 0,
+          "longitude": 0
+        },
+        "speed": 0,
+        "tracking_capacity": 40,
+        "update_frequency": 1
+      },
+      "registration_time": "2026-04-02T09:15:02.896252",
+      "resource_id": 5,
+      "resource_type": "platform",
+      "state": {
+        "ammunition_level": 1,
+        "availability_status": "available",
+        "battery_level": 1,
+        "connection_strength": 0.95,
+        "fuel_consumption_rate": 100,
+        "fuel_level": 1,
+        "health_level": 1,
+        "last_update_time": "2026-04-02T09:15:02.896252",
+        "mission_status": "idle",
+        "network_latency": 10,
+        "next_maintenance_time": null,
+        "operational_status": "online",
+        "packet_loss_rate": 0.01,
+        "power_consumption": 5000,
+        "uptime": 0
+      },
+      "tags": [
+        "法国",
+        "巡防舰"
+      ]
+    }
+  ],
+  "任务描述": "模拟任务测试",
+  "作战类型": "defense",
+  "作战时间": {
+    "开始时间": "2026-04-01 00:00:00",
+    "结束时间": "2026-04-24 00:00:00"
+  },
+  "scenarioId": 2,
+  "side": "RED"
+}
