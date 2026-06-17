@@ -7,12 +7,17 @@
         <template #content>
           <div class="header-content">
             <span class="header-title">{{ equipment.name }}</span>
+            <!-- 视图模式切换 -->
+            <el-radio-group v-model="viewMode" size="small" style="margin-left: 20px">
+              <el-radio-button label="traditional">传统视图</el-radio-button>
+              <el-radio-button label="pccs">PCCS 视图</el-radio-button>
+            </el-radio-group>
           </div>
         </template>
       </el-page-header>
 
-      <!-- 卡片网格布局 -->
-      <div class="details-grid">
+      <!-- 传统视图 -->
+      <div v-if="viewMode === 'traditional'" class="details-grid">
         <!-- 装备基本信息卡片 -->
         <el-card class="detail-card">
           <template #header>
@@ -53,19 +58,35 @@
           </el-table>
         </el-card>
 
-<!-- *** 核心修复 1：使用 v-for 遍历 details 对象来生成表格 *** -->
+<!-- *** 核心修复 1：使用 v-for 遍历 details 对象来生成表格，支持两层嵌套 *** -->
         <el-card class="info-card">
           <template #header><div class="card-header">详细参数 (Details)</div></template>
           <div v-if="hasDetails">
             <el-descriptions :column="1" border>
-              <el-descriptions-item 
-                v-for="(value, key) in equipment.details" 
-                :key="key" 
+              <el-descriptions-item
+                v-for="(value, key) in equipment.details"
+                :key="key"
                 :label="key"
               >
-                <!-- 如果值是对象或数组，美化显示 -->
-                <pre v-if="isObject(value)" class="json-code-block">{{ formatJson(value) }}</pre>
-                <!-- 否则直接显示 -->
+                <!-- 第一级：如果值是对象，渲染为嵌套的描述列表 -->
+                <div v-if="isObject(value) && !Array.isArray(value)">
+                  <el-descriptions :column="1" border size="small" class="nested-descriptions">
+                    <el-descriptions-item
+                      v-for="(nestedValue, nestedKey) in value"
+                      :key="nestedKey"
+                      :label="nestedKey"
+                      label-class-name="nested-label"
+                    >
+                      <!-- 第二级：如果仍然是对象，则使用 JSON 格式显示 -->
+                      <pre v-if="isObject(nestedValue)" class="json-code-block">{{ formatJson(nestedValue) }}</pre>
+                      <!-- 否则直接显示 -->
+                      <span v-else>{{ nestedValue }}</span>
+                    </el-descriptions-item>
+                  </el-descriptions>
+                </div>
+                <!-- 第一级：如果值是数组，使用 JSON 格式显示 -->
+                <pre v-else-if="Array.isArray(value)" class="json-code-block">{{ formatJson(value) }}</pre>
+                <!-- 第一级：如果是普通值，直接显示 -->
                 <span v-else>{{ value }}</span>
               </el-descriptions-item>
             </el-descriptions>
@@ -73,8 +94,13 @@
           <el-empty v-else description="无详细参数" :image-size="60" />
         </el-card>
       </div>
+
+      <!-- PCCS 视图 -->
+      <div v-if="viewMode === 'pccs'">
+        <PCCSDisplay resource-type="equipment" :resource-id="props.id" />
+      </div>
     </div>
-    
+
     <!-- 加载失败或无数据时的提示 -->
     <el-empty v-else-if="!loading" description="未能加载装备数据" />
   </div>
@@ -85,6 +111,7 @@ import { ref, watchEffect, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '@/services/api';
 import { ElMessage } from 'element-plus';
+import PCCSDisplay from '@/components/pccs/PCCSDisplay.vue';
 
 
 const props = defineProps({
@@ -97,6 +124,7 @@ const props = defineProps({
 const router = useRouter();
 const loading = ref(true);
 const equipment = ref(null);
+const viewMode = ref('traditional'); // 视图模式: traditional / pccs
 
 
 const hasDetails = computed(() => {
@@ -151,7 +179,34 @@ watchEffect(() => {
 .card-header span { font-weight: bold; color: #303133; }
 .item-link { color: #409eff; text-decoration: none; font-weight: 500; }
 .item-link:hover { text-decoration: underline; color: #79bbff; }
+
 :deep(.my-label) {
   width: 120px;
+}
+
+/* 嵌套描述列表样式 */
+.nested-descriptions {
+  margin: 0;
+  background-color: #fafafa;
+}
+
+:deep(.nested-label) {
+  width: 150px;
+  background-color: #f5f7fa !important;
+  font-size: 13px;
+  color: #606266;
+}
+
+/* JSON 代码块样式 */
+.json-code-block {
+  margin: 0;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+  overflow-x: auto;
 }
 </style>

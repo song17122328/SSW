@@ -19,55 +19,71 @@
     <div class="dashboard-content">
       <!-- 左侧内容区 -->
       <div class="content-left">
-        <!-- 平台分类饼图 -->
-        <el-card class="dashboard-card" shadow="hover">
-          <template #header><div class="card-header">平台分类</div></template>
-          <div class="chart-container" v-loading="dashboardStore.loading">
-            <!-- *** 核心修复 1：增加 v-else 的空状态显示 *** -->
-            <pie-chart 
-              v-if="!dashboardStore.loading && dashboardStore.platformCount > 0" 
-              :data="platformChartData"
-            />
-            <el-empty v-else description="暂无平台数据" :image-size="80" />
-          </div>
-        </el-card>
+        <!-- 第一行：平台状态 / 装备状态 -->
+        <div class="charts-row">
+          <!-- 平台状态 -->
+          <el-card class="dashboard-card" shadow="hover">
+            <template #header><div class="card-header">平台状态</div></template>
+            <div class="chart-container" v-loading="dashboardStore.loading">
+              <pie-chart
+                v-if="!dashboardStore.loading && dashboardStore.platformCount > 0"
+                :data="platformStatusChartData"
+              />
+              <el-empty v-else description="暂无平台数据" :image-size="80" />
+            </div>
+          </el-card>
 
-        <!-- 合同状态条形图 -->
+          <!-- 装备状态 -->
+          <el-card class="dashboard-card" shadow="hover">
+            <template #header><div class="card-header">装备状态</div></template>
+            <div class="chart-container" v-loading="dashboardStore.loading">
+              <pie-chart
+                v-if="!dashboardStore.loading && dashboardStore.equipmentCount > 0"
+                :data="equipmentStatusChartData"
+              />
+              <el-empty v-else description="暂无装备数据" :image-size="80" />
+            </div>
+          </el-card>
+        </div>
+
+        <!-- 第二行：平台分类 / 装备分类 -->
+        <div class="charts-row">
+          <!-- 平台分类 -->
+          <el-card class="dashboard-card" shadow="hover">
+            <template #header><div class="card-header">平台分类</div></template>
+            <div class="chart-container" v-loading="dashboardStore.loading">
+              <pie-chart
+                v-if="!dashboardStore.loading && dashboardStore.platformCount > 0"
+                :data="platformChartData"
+              />
+              <el-empty v-else description="暂无平台数据" :image-size="80" />
+            </div>
+          </el-card>
+
+          <!-- 装备分类 -->
+          <el-card class="dashboard-card" shadow="hover">
+            <template #header><div class="card-header">装备分类</div></template>
+            <div class="chart-container" v-loading="dashboardStore.loading">
+              <pie-chart
+                v-if="!dashboardStore.loading && dashboardStore.equipmentCount > 0"
+                :data="equipmentTypeChartData"
+              />
+              <el-empty v-else description="暂无装备数据" :image-size="80" />
+            </div>
+          </el-card>
+        </div>
+
+        <!-- 第三行：合同状态（单独占一行）-->
         <el-card class="dashboard-card" shadow="hover">
           <template #header><div class="card-header">合同状态</div></template>
           <div class="chart-container" v-loading="dashboardStore.loading">
-            <!-- *** 核心修复 2：增加 v-else 的空状态显示 *** -->
-            <bar-chart 
-              v-if="!dashboardStore.loading && dashboardStore.contractCount > 0" 
+            <bar-chart
+              v-if="!dashboardStore.loading && dashboardStore.contractCount > 0"
               :data="contractChartData"
             />
             <el-empty v-else description="合同数量为 0" :image-size="80" />
           </div>
         </el-card>
-
-
-        <!-- ========================================================== -->
-        <!-- *** 新增：恢复装备状态分布卡片 *** -->
-        <!-- ========================================================== -->
-        <el-card class="dashboard-card" shadow="hover">
-          <template #header>
-            <div class="card-header-with-action">
-              <span>装备状态分布</span>
-              <el-button v-if="userStore.isAdmin" type="primary" link>维护状态</el-button>
-            </div>
-          </template>
-            <!-- 装备状态分布饼图 -->
-            <div class="chart-container" v-loading="dashboardStore.loading">
-              <pie-chart 
-                v-if="!dashboardStore.loading && dashboardStore.equipmentCount > 0" 
-                :data="equipmentStatusChartData"
-              />
-            </div> 
-
-        </el-card>
-        <!-- ========================================================== -->
-
-
       </div>
 
 
@@ -206,6 +222,13 @@ const platformChartData = computed(() => [
   { value: dashboardStore.platformStats.aircraft, name: '航空平台', itemStyle: { color: '#2ecc71' } }
 ]);
 
+// 平台状态图表数据
+const platformStatusChartData = computed(() => [
+  { value: dashboardStore.platformStatusStats.active, name: '可用', itemStyle: { color: '#27ae60' } },
+  { value: dashboardStore.platformStatusStats.maintenance, name: '维护中', itemStyle: { color: '#f39c12' } },
+  { value: dashboardStore.platformStatusStats.inactive, name: '已停用', itemStyle: { color: '#95a5a6' } },
+]);
+
 const contractChartData = computed(() => ({
   labels: ['待审批', '已批准', '已驳回'],
   values: [
@@ -222,6 +245,16 @@ const equipmentStatusChartData = computed(() => [
   { value: dashboardStore.equipmentStatusStats.active, name: '可用', itemStyle: { color: '#27ae60' } },
   { value: dashboardStore.equipmentStatusStats.maintenance, name: '维护中', itemStyle: { color: '#f39c12' } },
   { value: dashboardStore.equipmentStatusStats.inactive, name: '已停用', itemStyle: { color: '#95a5a6' } },
+]);
+// ==========================================================
+
+// ==========================================================
+// *** 新增：为装备类型饼图准备数据 ***
+// ==========================================================
+const equipmentTypeChartData = computed(() => [
+  { value: dashboardStore.equipmentTypeStats.sense, name: '感知类 (S)', itemStyle: { color: '#3498db' } },
+  { value: dashboardStore.equipmentTypeStats.control, name: '控制类 (C)', itemStyle: { color: '#9b59b6' } },
+  { value: dashboardStore.equipmentTypeStats.action, name: '执行类 (A)', itemStyle: { color: '#e74c3c' } },
 ]);
 // ==========================================================
 
@@ -388,16 +421,31 @@ onActivated(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  
+
   /* 确保这些容器没有内边距，这很重要 */
   padding: 0;
-  
+
   /*
     我们也可以在这里加 !important 以防万一，
     但通常问题出在子元素（卡片）上。
   */
   margin: 0 !important;
 }
+
+/* ========================================================== */
+/* *** 新增：图表并排展示的行布局 *** */
+/* ========================================================== */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 0 !important;
+}
+
+.charts-row > * {
+  margin: 0 !important;
+}
+/* ========================================================== */
 
 .chart-container {
   height: 280px;

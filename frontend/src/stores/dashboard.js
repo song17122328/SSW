@@ -23,6 +23,13 @@ export const useDashboardStore = defineStore('dashboard', () => {
     // 按平台类型（舰艇/飞机）分类统计
     const platformStats = ref({ ship: 0, aircraft: 0 })
 
+    // 按平台状态统计
+    const platformStatusStats = ref({
+        active: 0,    // 可用
+        inactive: 0,  // 停用
+        maintenance: 0 // 维护
+    })
+
     // 按合同状态统计 (我们可以获取所有合同，然后在前端分类)
     const contractStats = ref({ pending: 0, approved: 0, rejected: 0 })
 
@@ -33,6 +40,16 @@ export const useDashboardStore = defineStore('dashboard', () => {
         active: 0,    // 可用
         inactive: 0,  // 停用
         maintenance: 0 // 维护
+    })
+    // ==========================================================
+
+    // ==========================================================
+    // *** 新增：为装备类型统计添加 State ***
+    // ==========================================================
+    const equipmentTypeStats = ref({
+        sense: 0,    // 感知类 (S)
+        control: 0,  // 控制类 (C)
+        action: 0    // 执行类 (A)
     })
     // ==========================================================
 
@@ -59,6 +76,11 @@ export const useDashboardStore = defineStore('dashboard', () => {
             platformStats.value.ship = allPlatforms.filter(p => p.category === '舰艇').length;
             platformStats.value.aircraft = allPlatforms.filter(p => p.category === '飞机').length;
 
+            // 计算平台状态统计
+            platformStatusStats.value.active = allPlatforms.filter(p => p.status === '可用').length;
+            platformStatusStats.value.inactive = allPlatforms.filter(p => p.status === '停用').length;
+            platformStatusStats.value.maintenance = allPlatforms.filter(p => p.status === '维护').length;
+
             // 2. 更新装备统计
             const allEquipment = equipmentResponse.items;
             equipmentCount.value = equipmentResponse.total;
@@ -70,6 +92,14 @@ export const useDashboardStore = defineStore('dashboard', () => {
             equipmentStatusStats.value.active = allEquipment.filter(e => e.status === '可用').length;
             equipmentStatusStats.value.inactive = allEquipment.filter(e => e.status === '停用').length;
             equipmentStatusStats.value.maintenance = allEquipment.filter(e => e.status === '维护').length;
+            // ==========================================================
+
+            // ==========================================================
+            // *** 新增：计算装备类型统计（基于 type_code）***
+            // ==========================================================
+            equipmentTypeStats.value.sense = allEquipment.filter(e => e.type_code === 'S').length;
+            equipmentTypeStats.value.control = allEquipment.filter(e => e.type_code === 'C').length;
+            equipmentTypeStats.value.action = allEquipment.filter(e => e.type_code === 'A').length;
             // ==========================================================
 
             // 3. 更新合同统计
@@ -109,9 +139,11 @@ export const useDashboardStore = defineStore('dashboard', () => {
         contractCount,
         scenarioCount,
         platformStats,
+        platformStatusStats,
         contractStats,
         recentActivities,
         equipmentStatusStats,
+        equipmentTypeStats,
         fetchDashboardData,
         addActivity
     }

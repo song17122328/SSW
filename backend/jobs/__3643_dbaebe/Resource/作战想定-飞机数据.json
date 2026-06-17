@@ -1,0 +1,146 @@
+{
+  "53": {
+    "vehicle": {
+      "name": "侦察型无人机-4",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "54": {
+    "vehicle": {
+      "name": "歼-15-3",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "57": {
+    "vehicle": {
+      "name": "歼-15-2",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "59": {
+    "vehicle": {
+      "name": "对空型无人艇-8",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "60": {
+    "vehicle": {
+      "name": "侦察型无人机-2",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "63": {
+    "vehicle": {
+      "name": "侦察型无人机-1",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "66": {
+    "vehicle": {
+      "name": "对空型无人艇-7",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "68": {
+    "vehicle": {
+      "name": "对海型无人艇-2",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "69": {
+    "vehicle": {
+      "name": "歼-15-1",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "70": {
+    "vehicle": {
+      "name": "YJJ-2",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "74": {
+    "vehicle": {
+      "name": "侦察型无人机-5",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "79": {
+    "vehicle": {
+      "name": "YJJ-1",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "81": {
+    "vehicle": {
+      "name": "对海型无人艇-3",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "83": {
+    "vehicle": {
+      "name": "对海型无人艇-1",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "86": {
+    "vehicle": {
+      "name": "对海型无人艇-4",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "87": {
+    "vehicle": {
+      "name": "对空型无人艇-6",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "92": {
+    "vehicle": {
+      "name": "对空型无人艇-8",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  },
+  "94": {
+    "vehicle": {
+      "name": "侦察型无人机-3",
+      "params": {
+        "maxSpeed": 900
+      }
+    }
+  }
+}

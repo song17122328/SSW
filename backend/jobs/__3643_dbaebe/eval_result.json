@@ -1,0 +1,27 @@
+{
+  "per_task_named": {
+    "模拟作战任务": [
+      {
+        "resource_name": "侦察型无人机-4",
+        "capability": "sense"
+      },
+      {
+        "resource_name": "侦察型无人机-4",
+        "capability": "comm"
+      }
+    ]
+  },
+  "reward": {
+    "total": 5.16,
+    "components": {
+      "cover": 3.2,
+      "scarcity": 0.0,
+      "submatch": 0.0,
+      "over": 0.0,
+      "cost": -0.02,
+      "timeliness": -0.019999999999999997,
+      "type_match": 1.0,
+      "speed_meet": 1.0
+    }
+  }
+}

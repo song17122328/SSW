@@ -165,6 +165,54 @@
             </div>
           </div>
 
+          <!-- PCCS 选中资源展示 -->
+          <div class="preview-section" v-if="contractData.PCCS资源 && contractData.PCCS资源.length > 0">
+            <h4>
+              选中的 PCCS 资源
+              <el-tag type="success" effect="light" size="small" style="margin-left: 10px">
+                共 {{ contractData.PCCS资源.length }} 项
+              </el-tag>
+            </h4>
+            <div class="pccs-resources-grid">
+              <div v-for="(resource, index) in contractData.PCCS资源" :key="index" class="pccs-resource-card">
+                <div class="resource-header">
+                  <span class="resource-name">{{ resource.name }}</span>
+                  <el-tag :type="getResourceTypeTag(resource.resource_type)" size="small">
+                    {{ resource.resource_type === 'platform' ? '平台' : '装备' }}
+                  </el-tag>
+                </div>
+                <div class="resource-info">
+                  <div class="info-row">
+                    <span class="label">类别：</span>
+                    <span class="value">{{ resource.category }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">效能评分：</span>
+                    <el-tag
+                      :type="resource.match_effectiveness >= 0.8 ? 'success' : resource.match_effectiveness >= 0.6 ? 'warning' : 'info'"
+                      size="small"
+                    >
+                      {{ (resource.match_effectiveness * 100).toFixed(0) }}%
+                    </el-tag>
+                  </div>
+                  <div class="info-row" v-if="resource.capability && resource.capability.mission_types">
+                    <span class="label">任务类型：</span>
+                    <span class="value">{{ resource.capability.mission_types.join(', ') }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">状态：</span>
+                    <el-tag
+                      :type="resource.state.operational_status === '可用' ? 'success' : resource.state.operational_status === '维护' ? 'warning' : 'danger'"
+                      size="small"
+                    >
+                      {{ resource.state.operational_status }}
+                    </el-tag>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="preview-section">
             <h4>详细配置</h4>
             <el-collapse>
@@ -465,6 +513,11 @@ function getTypeLabel(type) {
   return typeObj ? typeObj.label : '';
 }
 
+// PCCS 资源类型标签颜色
+function getResourceTypeTag(resourceType) {
+  return resourceType === 'platform' ? 'primary' : 'success';
+}
+
 </script>
 
 <style scoped>
@@ -699,4 +752,62 @@ function getTypeLabel(type) {
 .type-icon.scenario-sea { background-color: #3498db; } /* 蓝色 */
 .type-icon.scenario-air { background-color: #8e44ad; } /* 紫色 */
 .type-icon.scenario-default { background-color: #7f8c8d; } /* 灰色 */
+
+/* PCCS 资源展示样式 */
+.pccs-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.pccs-resource-card {
+  background: #f8f9fa;
+  border: 1px solid #e4e7ed;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.pccs-resource-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #409eff;
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e4e7ed;
+}
+
+.resource-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #2c3e50;
+}
+
+.resource-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.info-row .label {
+  color: #909399;
+  min-width: 80px;
+}
+
+.info-row .value {
+  color: #606266;
+  flex: 1;
+}
 </style>

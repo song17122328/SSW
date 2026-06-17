@@ -121,7 +121,7 @@ const routes = [
     path: '/combat',
     name: 'Combat',
     redirect: '/combat/simulation',
-    meta: { title: '作战仿真', icon: 'Aim', roles: ['user', 'admin'] },
+    meta: { title: '作战仿真', icon: 'Aim', roles: [] },
     children: [
       {
         path: 'simulation',
